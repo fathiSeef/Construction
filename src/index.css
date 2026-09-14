@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+:root {
+  --color-gold: #e9c349;
+  --color-gold-glow: rgba(233, 195, 73, 0.35);
+  --bg-dark: #10131a;
+}
+
+body {
+  margin: 0;
+  background-color: #10131a;
+  color: #e0e2ec;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.glass-panel {
+  background: rgba(20, 24, 33, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(233, 195, 73, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(233, 195, 73, 0.5);
+  box-shadow: 0 12px 40px rgba(233, 195, 73, 0.15);
+}
+
+.glass-panel-gold {
+  background: linear-gradient(135deg,
+      rgba(233, 195, 73, 0.08) 0%,
+      rgba(20, 24, 33, 0.75) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(233, 195, 73, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg,
+      #fff2c4 0%,
+      #e9c349 50%,
+      #b38b1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold Text Glow */
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(233, 195, 73, 0.45);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e15;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2f3d;
+  border-radius: 4px;
+  border: 1px solid rgba(233, 195, 73, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e9c349;
+}
+
+/* GSAP Text Stages */
+.text-stage {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  max-width: 580px;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.text-stage.active {
+  pointer-events: auto;
+}
+
+/* AUTOMATED SLIDING TESTIMONIALS CAROUSEL (LIKE UI-DESIGNS-ETA) */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 16px 0 28px 0;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: scroll-carousel 45s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.testimonial-card-auto {
+  width: 400px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .testimonial-card-auto {
+    width: 310px;
+  }
+}
+
+.testimonial-card-auto:hover {
+  transform: translateY(-4px);
+  border-color: rgba(233, 195, 73, 0.6) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(233, 195, 73, 0.15);
+}
+
+@keyframes scroll-carousel {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 12px));
+  }
+}
