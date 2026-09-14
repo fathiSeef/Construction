@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const unitData = {
@@ -12,8 +12,8 @@ const unitData = {
     glazing: "German Acoustic",
     ac: "Full Inverter VRV",
     image:
-      "https://www.figma.com/api/mcp/asset/4c000ff6-ce64-42b7-8d26-aa099d3fc4b7.png",
-    reserveUrl: "/contact.html?plan=suite-a#contact",
+      "/assets/images/unit.jpg",
+    reserveUrl: "/contact?plan=suite-a#contact",
   },
   "suite-b": {
     title: "Executive Luxury Suite (Unit B)",
@@ -25,13 +25,20 @@ const unitData = {
     glazing: "German Acoustic",
     ac: "Full Inverter VRV",
     image:
-      "https://www.figma.com/api/mcp/asset/3632f001-9abc-4c48-af35-2ce388441613.png",
-    reserveUrl: "/contact.html?plan=suite-b#contact",
+      "/assets/images/unit.jpg",
+    reserveUrl: "/contact?plan=suite-b#contact",
   },
 };
 
 function Residences() {
-  const [selectedUnit, setSelectedUnit] = useState("suite-a");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedUnit =
+    searchParams.get("suite") === "suite-b" ? "suite-b" : "suite-a";
+
+  const handleUnitChange = (unit) => {
+    setSearchParams({ suite: unit });
+  };
 
   return (
     <>
@@ -63,14 +70,14 @@ function Residences() {
 
       {/* Unit Selector Tabs */}
       <div className="flex items-center justify-center gap-3 mt-10" aria-label="Unit selection">
-        <button id="tab-unit-a" onClick={() => setSelectedUnit("suite-a")} type="button" onClick={() => setSelectedUnit("suite-a")} className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-[1px] uppercase transition-all ${
+        <button id="tab-unit-a" onClick={() => handleUnitChange("suite-a")} type="button" className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-[1px] uppercase transition-all ${
             selectedUnit === "suite-a"
               ? "bg-[#e9c349] text-[#3c2f00] shadow-[0_4px_15px_rgba(233,195,73,0.3)]"
               : "border border-[rgba(233,195,73,0.3)] bg-[#191c24] text-[#c6c6cb] hover:text-[#e9c349]"
           } cursor-pointer`}>
           Grand Suite — Unit A (1,425 Sq.Ft)
         </button>
-        <button id="tab-unit-b" onClick={() => setSelectedUnit("suite-b")} type="button" onClick={() => setSelectedUnit("suite-b")} className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-[1px] uppercase transition-all ${
+        <button id="tab-unit-b" onClick={() => handleUnitChange("suite-b")} type="button" className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-[1px] uppercase transition-all ${
             selectedUnit === "suite-b"
               ? "bg-[#e9c349] text-[#3c2f00] shadow-[0_4px_15px_rgba(233,195,73,0.3)]"
               : "border border-[rgba(233,195,73,0.3)] bg-[#191c24] text-[#c6c6cb] hover:text-[#e9c349]"
@@ -81,7 +88,7 @@ function Residences() {
     </section>
 
     {/* INTERACTIVE SHOWCASE AREA */}
-    <section className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-16 pb-16 sm:pb-24">
+    <section id="suite-details" className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-16 pb-16 sm:pb-24 scroll-mt-24">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-panel-gold rounded-3xl p-6 sm:p-10">
         
         {/* Floor Plan Visual Card */}
@@ -135,7 +142,7 @@ function Residences() {
             <a id="brochure-download-btn" href="/brochure" className="glass-panel flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 text-xs font-bold tracking-[1.5px] uppercase text-[#e0e2ec] hover:border-[#e9c349] hover:text-[#e9c349] transition-all">
               <i className="fa-solid fa-file-pdf text-[#e9c349]"></i> Download Prospectus
             </a>
-            <a href="investment-calculator.html" className="text-xs font-bold text-[#e9c349] hover:underline whitespace-nowrap ml-auto pt-2 sm:pt-0">
+            <a href="/investment-calculator" className="text-xs font-bold text-[#e9c349] hover:underline whitespace-nowrap ml-auto pt-2 sm:pt-0">
               Calculate ROI →
             </a>
           </div>
@@ -217,7 +224,7 @@ function Residences() {
           Schedule a private VIP walk-through with our architectural directors and review physical material samples.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <a href="contact.html#contact" className="rounded-xl bg-[#e9c349] px-8 py-3 text-xs font-bold uppercase tracking-[1.5px] text-[#3c2f00] hover:bg-[#ffd659] transition-all shadow-[0_4px_20px_rgba(233,195,73,0.35)]">
+          <a href="/contact#contact" className="rounded-xl bg-[#e9c349] px-8 py-3 text-xs font-bold uppercase tracking-[1.5px] text-[#3c2f00] hover:bg-[#ffd659] transition-all shadow-[0_4px_20px_rgba(233,195,73,0.35)]">
             Schedule Private Consultation
           </a>
           <a href="/brochure" className="glass-panel rounded-xl px-7 py-3 text-xs font-bold uppercase tracking-[1.5px] text-[#e0e2ec] hover:border-[#e9c349] hover:text-[#e9c349] transition-all">

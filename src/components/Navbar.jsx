@@ -29,7 +29,7 @@ function Navbar() {
                     >
                         <div className="h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-[#0b0e15] sm:h-10 sm:w-10">
                             <img
-                                src="https://www.figma.com/api/mcp/asset/4c30c0ab-fe3d-4ae3-bee8-e5f401a68cba.png"
+                                src="/assets/icons/logo.png"
                                 alt="A&Y Consolidated"
                                 className="h-full w-full object-cover"
                             />
@@ -50,9 +50,10 @@ function Navbar() {
                         <NavLink
                             to="/"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -67,13 +68,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
-
+                        {/* ABOUT US */}
                         <NavLink
                             to="/about"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -88,12 +90,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
+                        {/* SERVICES */}
                         <NavLink
                             to="/services"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -108,13 +112,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
-
+                        {/* RESIDENCES */}
                         <NavLink
                             to="/residences"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -129,13 +134,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
-
+                        {/* INVESTMENT */}
                         <NavLink
                             to="/investment"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -150,19 +156,21 @@ function Navbar() {
                             )}
                         </NavLink>
 
-
+                        {/* TESTIMONIALS */}
                         <NavLink
                             to="/testimonials"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
                             {({ isActive }) => (
                                 <>
                                     Testimonials
+
                                     {isActive && (
                                         <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
                                     )}
@@ -170,12 +178,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
+                        {/* FAQ */}
                         <NavLink
                             to="/faq"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -190,12 +200,14 @@ function Navbar() {
                             )}
                         </NavLink>
 
+                        {/* CONTACT */}
                         <NavLink
                             to="/contact"
                             className={({ isActive }) =>
-                                `relative text-[12px] font-bold tracking-[1.8px] transition ${isActive
-                                    ? "text-[#e9c349]"
-                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
+                                `relative text-[12px] font-bold tracking-[1.8px] transition ${
+                                    isActive
+                                        ? "text-[#e9c349]"
+                                        : "text-[#c6c6cb] hover:text-[#e9c349]"
                                 }`
                             }
                         >
@@ -267,8 +279,9 @@ function Navbar() {
             {/* MOBILE NAVIGATION DRAWER */}
             <div
                 id="mobile-menu"
-                className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] transition-all duration-300 lg:hidden ${isMobileMenuOpen ? "flex" : "hidden"
-                    }`}
+                className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] transition-all duration-300 lg:hidden ${
+                    isMobileMenuOpen ? "flex" : "hidden"
+                }`}
             >
                 <nav className="flex flex-col gap-3">
 
@@ -277,15 +290,22 @@ function Navbar() {
                         to="/"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Home</span>
+                        {({ isActive }) => (
+                            <>
+                                <span>Home</span>
 
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* ABOUT US */}
@@ -293,15 +313,22 @@ function Navbar() {
                         to="/about"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>About Us</span>
+                        {({ isActive }) => (
+                            <>
+                                <span>About Us</span>
 
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* SERVICES */}
@@ -309,15 +336,22 @@ function Navbar() {
                         to="/services"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Services</span>
+                        {({ isActive }) => (
+                            <>
+                                <span>Services</span>
 
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* RESIDENCES */}
@@ -325,15 +359,22 @@ function Navbar() {
                         to="/residences"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Residences</span>
+                        {({ isActive }) => (
+                            <>
+                                <span>Residences</span>
 
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* INVESTMENT */}
@@ -341,15 +382,22 @@ function Navbar() {
                         to="/investment"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.15)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.15)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Investment</span>
+                        {({ isActive }) => (
+                            <>
+                                <span>Investment</span>
 
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* TESTIMONIALS */}
@@ -357,14 +405,22 @@ function Navbar() {
                         to="/testimonials"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Testimonials</span>
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                        {({ isActive }) => (
+                            <>
+                                <span>Testimonials</span>
+
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* FAQ */}
@@ -372,14 +428,22 @@ function Navbar() {
                         to="/faq"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>FAQ</span>
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                        {({ isActive }) => (
+                            <>
+                                <span>FAQ</span>
+
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
 
                     {/* CONTACT */}
@@ -387,14 +451,22 @@ function Navbar() {
                         to="/contact"
                         onClick={closeMobileMenu}
                         className={({ isActive }) =>
-                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${isActive
-                                ? "text-[#e9c349]"
-                                : "text-[#c6c6cb] hover:text-[#e9c349]"
+                            `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
+                                isActive
+                                    ? "text-[#e9c349]"
+                                    : "text-[#c6c6cb] hover:text-[#e9c349]"
                             }`
                         }
                     >
-                        <span>Contact</span>
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                        {({ isActive }) => (
+                            <>
+                                <span>Contact</span>
+
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
+                                )}
+                            </>
+                        )}
                     </NavLink>
                 </nav>
 

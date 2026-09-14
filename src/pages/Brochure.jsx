@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 function Brochure() {
@@ -42,16 +42,37 @@ function Brochure() {
           content="Official architectural prospectus, structural blueprints, and engineering finishing schedule for A&Y Consolidated Luxury Residences."
         />
 
-        <meta
-          name="keywords"
-          content="A&Y Consolidated, architectural prospectus, engineering dossier, luxury residences, floor plans, Dehiwala, Sri Lanka"
-        />
-
-        <meta name="robots" content="index, follow" />
       </Helmet>
 
       {/* Print-only styles */}
       <style>{`
+        .glass-panel {
+          background: rgba(20, 24, 33, 0.7);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(233, 195, 73, 0.2);
+          transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+          border-color: rgba(233, 195, 73, 0.5);
+          box-shadow: 0 10px 30px rgba(233, 195, 73, 0.12);
+        }
+
+        .gold-gradient-text {
+          background: linear-gradient(135deg, #fff2c4 0%, #e9c349 50%, #b38b1f 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .font-display {
+          font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .brochure-page {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         @media print {
           header,
           footer,
@@ -63,11 +84,17 @@ function Brochure() {
             background: white !important;
             color: black !important;
           }
+
+          .glass-panel,
+          .glass-panel:hover {
+            box-shadow: none !important;
+          }
         }
       `}</style>
 
       <div
         className="
+          brochure-page
           min-h-screen
           bg-[#10131a]
           text-[#e0e2ec]
@@ -129,6 +156,7 @@ function Brochure() {
                 duration-200
                 hover:bg-[#e9c349]
                 hover:text-[#10131a]
+                cursor-pointer
               "
             >
               <svg
@@ -145,7 +173,7 @@ function Brochure() {
                 />
               </svg>
 
-              <span>Back to Residences</span>
+              <span>Back to Previous</span>
             </button>
 
             {/* Quick Action Buttons */}
@@ -173,6 +201,7 @@ function Brochure() {
                   hover:bg-[#e9c349]
                   hover:text-[#3c2f00]
                   sm:inline-flex
+                  cursor-pointer
                 "
               >
                 <svg
@@ -192,11 +221,8 @@ function Brochure() {
                 Print / Save PDF
               </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  window.location.href = "/contact.html#contact";
-                }}
+              <Link
+                to="/contact#contact"
                 className="
                   rounded-xl
                   bg-[#e9c349]
@@ -213,7 +239,7 @@ function Brochure() {
                 "
               >
                 Reserve Suite
-              </button>
+              </Link>
             </div>
           </div>
         </header>
@@ -360,19 +386,7 @@ function Brochure() {
                   <>✓ Download Started</>
                 ) : (
                   <>
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2.2"
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"
-                      />
-                    </svg>
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
 
                     <span>Download Complete Dossier (PDF)</span>
                   </>
@@ -600,12 +614,8 @@ function Brochure() {
                   pt-4
                 "
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href =
-                      "/contact.html?plan=suite-a#contact";
-                  }}
+                <Link
+                  to="/contact?plan=suite-a#contact"
                   className="
                     rounded-xl
                     bg-[#e9c349]
@@ -621,7 +631,7 @@ function Brochure() {
                   "
                 >
                   Reserve Suite A
-                </button>
+                </Link>
 
                 <span className="font-mono text-xs text-[#e9c349]">
                   Only 3 Units Remaining
@@ -822,12 +832,8 @@ function Brochure() {
                   pt-4
                 "
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href =
-                      "/contact.html?plan=suite-b#contact";
-                  }}
+                <Link
+                  to="/contact?plan=suite-b#contact"
                   className="
                     rounded-xl
                     bg-[#e9c349]
@@ -843,7 +849,7 @@ function Brochure() {
                   "
                 >
                   Reserve Suite B
-                </button>
+                </Link>
 
                 <span className="font-mono text-xs text-[#e9c349]">
                   Only 2 Units Remaining
@@ -1158,9 +1164,10 @@ function Brochure() {
                 transition-all
                 hover:bg-[#e9c349]
                 hover:text-[#10131a]
+                cursor-pointer
               "
             >
-              <span>← Back to Residences</span>
+              <span>← Back to Previous</span>
             </button>
           </div>
         </main>

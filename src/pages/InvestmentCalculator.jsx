@@ -124,7 +124,20 @@ function InvestmentCalculator() {
       </header>
 
       {/* Calculator */}
-      <main className="mx-auto max-w-[1200px] px-4 py-12 sm:px-8 sm:py-16">
+      <style>{`
+        .investment-calculator-page .investment-glass-panel {
+          background: rgba(20, 24, 33, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(233, 195, 73, 0.22);
+        }
+
+        .investment-calculator-page input[type="range"] {
+          accent-color: #e9c349;
+        }
+      `}</style>
+
+      <main className="investment-calculator-page mx-auto max-w-[1200px] px-4 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(233,195,73,0.4)] bg-[rgba(29,32,39,0.8)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[2px] text-[#e9c349]">
             Financial Modeling &amp; Yield Estimator
@@ -161,7 +174,7 @@ function InvestmentCalculator() {
 
         <div className="mb-16 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
           {/* Inputs */}
-          <div className="glass-panel space-y-6 rounded-2xl p-6 sm:p-8 lg:col-span-6">
+          <div className="investment-glass-panel space-y-6 rounded-2xl p-6 sm:p-8 lg:col-span-6">
             <div>
               <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-[#e9c349]">
                 Select Apartment Unit Tier
@@ -335,7 +348,7 @@ function InvestmentCalculator() {
           </div>
 
           {/* Results */}
-          <div className="glass-panel rounded-2xl border border-[rgba(233,195,73,0.35)] p-6 shadow-[0_15px_45px_rgba(0,0,0,0.6)] sm:p-8 lg:col-span-6">
+          <div className="investment-glass-panel rounded-2xl border border-[rgba(233,195,73,0.35)] p-6 shadow-[0_15px_45px_rgba(0,0,0,0.6)] sm:p-8 lg:col-span-6">
             <div className="mb-6 flex items-center justify-between border-b border-[rgba(233,195,73,0.2)] pb-4">
               <span className="text-xs font-mono uppercase tracking-wider text-[#8e9099]">
                 Pro Forma Financial Summary

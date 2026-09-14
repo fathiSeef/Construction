@@ -1,0 +1,15 @@
+Figma file: 13fmr3jXZSKOyblZ9eM7X7
+Node: 1:2
+
+RAW IMAGES
+01 https://www.figma.com/api/mcp/asset/59b159d5-4d8b-46ff-9c68-e7f7dd9b89a3
+02 https://www.figma.com/api/mcp/asset/983338a6-858d-44e0-9a5c-44822df71ace
+03 https://www.figma.com/api/mcp/asset/c7a032a6-57b9-409f-9919-167e405116dc
+04 https://www.figma.com/api/mcp/asset/c69eda9c-9362-49f4-ab30-c224c9542704
+05 https://www.figma.com/api/mcp/asset/1e78afa0-97b1-48d5-990a-47ecbe284c1a
+
+SVG ASSETS
+01 https://www.figma.com/api/mcp/asset/bd7919d9-21e2-4cc6-bf2e-51fbe4d03dd8.svg
+02 https://www.figma.com/api/mcp/asset/3cae8388-5279-467a-a291-20ade5888e6f.svg
+03 https://www.figma.com/api/mcp/asset/f05e2d64-8b4b-4052-af41-dc09db5410d3.svg
+04 https://www.figma.com/api/mcp/asset/be5c74f1-0612-44e3-9708-6bfb0dfd47e3.svg

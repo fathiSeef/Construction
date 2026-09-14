@@ -519,7 +519,7 @@ function Home() {
             <article className="group overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.25)] bg-[rgba(28,31,38,0.6)] backdrop-blur-md transition-all duration-300 hover:border-[#e9c349] hover:shadow-[0_10px_30px_rgba(233,195,73,0.15)]">
               <div className="relative h-[220px] sm:h-[280px] overflow-hidden">
                 <img
-                  src="https://www.figma.com/api/mcp/asset/3632f001-9abc-4c48-af35-2ce388441613.png"
+                  src="/assets/images/nidapark-istinye.jpg"
                   alt="Kawdana Residence"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                 />
@@ -549,7 +549,7 @@ function Home() {
             <article className="group overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.25)] bg-[rgba(28,31,38,0.6)] backdrop-blur-md transition-all duration-300 hover:border-[#e9c349] hover:shadow-[0_10px_30px_rgba(233,195,73,0.15)]">
               <div className="relative h-[220px] sm:h-[280px] overflow-hidden">
                 <img
-                  src="https://www.figma.com/api/mcp/asset/9ab7ecc0-2542-4692-ae5f-ec8af738842e.png"
+                  src="/assets/images/img1.jpg"
                   alt="Hill Street Project"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                 />
@@ -887,7 +887,7 @@ function Home() {
               <div className="lg:col-span-7 overflow-hidden rounded-2xl border border-[rgba(233,195,73,0.25)] bg-[#0c0f16]/90 p-4 sm:p-8 flex items-center justify-center min-h-[340px] sm:min-h-[420px] relative group">
 
                 <img
-                  src="https://www.figma.com/api/mcp/asset/9ab7ecc0-2542-4692-ae5f-ec8af738842e.png"
+                  src="/assets/images/unit.jpg"
                   alt="Floor Plan Suite Type A"
                   className="max-h-[380px] w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                 />
@@ -992,7 +992,7 @@ function Home() {
               <div className="lg:col-span-7 overflow-hidden rounded-2xl border border-[rgba(233,195,73,0.25)] bg-[#0c0f16]/90 p-4 sm:p-8 flex items-center justify-center min-h-[340px] sm:min-h-[420px] relative group">
 
                 <img
-                  src="https://www.figma.com/api/mcp/asset/3632f001-9abc-4c48-af35-2ce388441613.png"
+                  src="/assets/images/unit.jpg"
                   alt="Floor Plan Suite Type B"
                   className="max-h-[380px] w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                 />
@@ -1330,7 +1330,7 @@ function Home() {
               <div className="relative h-48 rounded-2xl overflow-hidden mb-6 border border-[rgba(233,195,73,0.2)]">
 
                 <img
-                  src="https://www.figma.com/api/mcp/asset/3632f001-9abc-4c48-af35-2ce388441613.png"
+                  src="/assets/images/pool.jpg"
                   alt="Rooftop Infinity Pool"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
                 />
@@ -1364,7 +1364,7 @@ function Home() {
               <div className="relative h-48 rounded-2xl overflow-hidden mb-6 border border-[rgba(233,195,73,0.2)]">
 
                 <img
-                  src="https://www.figma.com/api/mcp/asset/9ab7ecc0-2542-4692-ae5f-ec8af738842e.png"
+                  src="/assets/images/parking.jpg"
                   alt="Smart RFID Parking"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
                 />
@@ -1398,7 +1398,7 @@ function Home() {
               <div className="relative h-48 rounded-2xl overflow-hidden mb-6 border border-[rgba(233,195,73,0.2)]">
 
                 <img
-                  src="https://www.figma.com/api/mcp/asset/4c30c0ab-fe3d-4ae3-bee8-e5f401a68cba.png"
+                  src="/assets/images/security.png"
                   alt="24/7 Biometric Security"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
                 />

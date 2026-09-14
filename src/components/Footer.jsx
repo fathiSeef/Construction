@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 function Footer() {
   const [email, setEmail] = useState("");
+  const location = useLocation();
+  const selectedSuite = new URLSearchParams(location.search).get("suite");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,6 +17,21 @@ function Footer() {
       setEmail("");
     }
   };
+
+  // Active navigation style
+  const navLinkClass = ({ isActive }) =>
+    `transition-colors ${
+      isActive
+        ? "font-bold text-[#e9c349]"
+        : "text-[#c6c6cb] hover:text-[#e9c349]"
+    }`;
+
+  const portfolioLinkClass = ({ isActive }) =>
+    `font-semibold transition-colors ${
+      isActive
+        ? "text-[#e9c349]"
+        : "text-[#e0e2ec] hover:text-[#e9c349]"
+    }`;
 
   return (
     <footer
@@ -29,7 +47,7 @@ function Footer() {
           <div className="mb-4 flex items-center gap-3">
             <div className="h-9 w-9 overflow-hidden rounded-xl border border-[rgba(233,195,73,0.3)] bg-[#0b0e15]">
               <img
-                src="https://www.figma.com/api/mcp/asset/4c30c0ab-fe3d-4ae3-bee8-e5f401a68cba.png"
+                src="/assets/icons/logo.png"
                 alt="A&Y Logo"
                 className="h-full w-full object-cover"
               />
@@ -60,68 +78,69 @@ function Footer() {
             Navigation
           </h4>
 
-          <ul className="space-y-2.5 text-xs text-[#c6c6cb]">
+          <ul className="space-y-2.5 text-xs">
+
+            {/* HOME */}
             <li>
-              <a
-                href="/#home"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/" className={navLinkClass}>
                 Home
-              </a>
+              </NavLink>
             </li>
 
+            {/* ABOUT */}
             <li>
-              <a
-                href="/about.html#about"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/about" className={navLinkClass}>
                 About Us
-              </a>
+              </NavLink>
             </li>
 
+            {/* SERVICES */}
             <li>
-              <a
-                href="/Residences.html"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/services" className={navLinkClass}>
+                Services
+              </NavLink>
+            </li>
+
+            {/* RESIDENCES */}
+            <li>
+              <NavLink to="/residences" className={navLinkClass}>
                 Residences
-              </a>
+              </NavLink>
             </li>
 
+            {/* INVESTMENT */}
             <li>
-              <a
-                href="/investment.html#investment"
-                className="font-bold text-[#e9c349]"
-              >
+              <NavLink to="/investment" className={navLinkClass}>
                 Investment
-              </a>
+              </NavLink>
             </li>
 
+            {/* TESTIMONIALS */}
             <li>
-              <a
-                href="/testimonials.html#testimonials"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/testimonials" className={navLinkClass}>
                 Testimonials
-              </a>
+              </NavLink>
             </li>
 
+            {/* BLOG */}
             <li>
-              <a
-                href="/FAQ.html#faq"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/blog" className={navLinkClass}>
+                Blog
+              </NavLink>
+            </li>
+
+            {/* FAQ */}
+            <li>
+              <NavLink to="/faq" className={navLinkClass}>
                 FAQ &amp; Due Diligence
-              </a>
+              </NavLink>
             </li>
 
+            {/* CONTACT */}
             <li>
-              <a
-                href="/contact.html#contact"
-                className="transition-colors hover:text-[#e9c349]"
-              >
+              <NavLink to="/contact" className={navLinkClass}>
                 Contact Us
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -135,46 +154,73 @@ function Footer() {
           </h4>
 
           <ul className="space-y-2.5 text-xs text-[#c6c6cb]">
+
+            {/* GRAND SUITE */}
             <li>
-              <a
-                href="/Residences.html"
-                className="font-semibold text-[#e0e2ec] transition-colors hover:text-[#e9c349]"
+              <Link
+                to="/residences?suite=suite-a#suite-details"
+                className={`font-semibold transition-colors ${
+                  location.pathname === "/residences" && selectedSuite === "suite-a"
+                    ? "font-bold text-[#e9c349]"
+                    : "text-[#e0e2ec] hover:text-[#e9c349]"
+                }`}
               >
                 Grand Suite A (1,425 Sq.Ft) — 3 Bed
-              </a>
+              </Link>
             </li>
 
+            {/* EXECUTIVE SUITE */}
             <li>
-              <a
-                href="/Residences.html"
-                className="font-semibold text-[#e0e2ec] transition-colors hover:text-[#e9c349]"
+              <Link
+                to="/residences?suite=suite-b#suite-details"
+                className={`font-semibold transition-colors ${
+                  location.pathname === "/residences" && selectedSuite === "suite-b"
+                    ? "font-bold text-[#e9c349]"
+                    : "text-[#e0e2ec] hover:text-[#e9c349]"
+                }`}
               >
-                Executive Suite B (1,273 Sq.Ft) — 3 Bed
-              </a>
+                Compact Luxury B (1,273 Sq.Ft) — 3 Bed
+              </Link>
             </li>
 
+            {/* ROI CALCULATOR */}
             <li>
-              <a
-                href="/investment-calculator.html"
-                className="mt-1 flex items-center gap-1 text-[#e9c349] hover:underline"
+              <NavLink
+                to="/investment-calculator"
+                className={({ isActive }) =>
+                  `mt-1 flex items-center gap-1 transition-colors ${
+                    isActive
+                      ? "font-bold text-[#e9c349]"
+                      : "text-[#e9c349] hover:underline"
+                  }`
+                }
               >
                 ROI &amp; Yield Calculator →
-              </a>
+              </NavLink>
             </li>
 
+            {/* BROCHURE */}
             <li>
-              <a
-                href="/brochure.html"
-                className="flex items-center gap-1 text-[#e9c349] hover:underline"
+              <NavLink
+                to="/brochure"
+                className={({ isActive }) =>
+                  `flex items-center gap-1 transition-colors ${
+                    isActive
+                      ? "font-bold text-[#e9c349]"
+                      : "text-[#e9c349] hover:underline"
+                  }`
+                }
               >
                 Download Prospectus (PDF) →
-              </a>
+              </NavLink>
             </li>
 
+            {/* SOLD OUT STATUS */}
             <li className="pt-2 text-[11px] text-[#8e9099]">
               Kawdana Residence — 100% Sold Out
             </li>
 
+            {/* FULLY BOOKED STATUS */}
             <li className="text-[11px] text-[#8e9099]">
               Hill Street Project — Fully Booked
             </li>
@@ -300,26 +346,31 @@ function Footer() {
         </p>
 
         <div className="flex items-center gap-6">
-          <a
-            href="/privacy-terms.html#privacy"
-            className="transition-colors hover:text-[#e9c349]"
+
+          {/* PRIVACY */}
+          <NavLink
+            to="/privacy-terms#privacy"
+            className={navLinkClass}
           >
             Privacy Policy
-          </a>
+          </NavLink>
 
-          <a
-            href="/privacy-terms.html#terms"
-            className="transition-colors hover:text-[#e9c349]"
+          {/* TERMS */}
+          <NavLink
+            to="/privacy-terms#terms"
+            className={navLinkClass}
           >
             Terms of Service
-          </a>
+          </NavLink>
 
-          <a
-            href="/privacy-terms.html#disclaimers"
-            className="transition-colors hover:text-[#e9c349]"
+          {/* LEGAL DISCLAIMERS */}
+          <NavLink
+            to="/privacy-terms#disclaimers"
+            className={navLinkClass}
           >
             Legal Disclaimers
-          </a>
+          </NavLink>
+
         </div>
       </div>
     </footer>

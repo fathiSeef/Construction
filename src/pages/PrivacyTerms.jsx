@@ -19,7 +19,7 @@ function PrivacyTerms() {
             type="button"
             onClick={() => window.history.back()}
             id="back-btn"
-            className="inline-flex items-center gap-2.5 rounded-xl border border-[rgba(233,195,73,0.4)] bg-[rgba(29,32,39,0.8)] px-4 py-2 text-xs font-bold uppercase tracking-[1.5px] text-[#e9c349] shadow-[0_2px_15px_rgba(233,195,73,0.15)] transition-all duration-200 hover:bg-[#e9c349] hover:text-[#10131a]"
+            className="inline-flex items-center gap-2.5 rounded-xl border border-[rgba(233,195,73,0.4)] bg-[rgba(29,32,39,0.8)] px-4 py-2 text-xs font-bold uppercase tracking-[1.5px] text-[#e9c349] shadow-[0_2px_15px_rgba(233,195,73,0.15)] transition-all duration-200 hover:bg-[#e9c349] hover:text-[#10131a] cursor-pointer"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
