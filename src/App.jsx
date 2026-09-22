@@ -14,6 +14,9 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import InvestmentCalculator from "./pages/InvestmentCalculator";
 import PrivacyTerms from "./pages/PrivacyTerms";
 import Services from "./pages/Services";
+import ConstructionRealEstate from "./pages/ConstructionRealEstate";
+import ImportExport from "./pages/ImportExport";
+import TradingDistribution from "./pages/TradingDistribution";
 
 function App() {
   return (
@@ -34,6 +37,20 @@ function App() {
           <Route path="/investment-calculator" element={<InvestmentCalculator />} />
           <Route path="/privacy-terms" element={<PrivacyTerms />} />
           <Route path="/services" element={<Services />} />
+          <Route
+            path="/construction-real-estate"
+            element={<ConstructionRealEstate />}
+          />
+
+          <Route
+            path="/import-export"
+            element={<ImportExport />}
+          />
+
+          <Route
+            path="/trading-distribution"
+            element={<TradingDistribution />}
+          />
         </Route>
 
       </Routes>
