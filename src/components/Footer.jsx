@@ -1,54 +1,60 @@
 import React, { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Footer() {
   const [email, setEmail] = useState("");
-  const location = useLocation();
-  const selectedSuite = new URLSearchParams(location.search).get("suite");
+  const [subscribed, setSubscribed] = useState(false);
+
+  // =========================================================
+  // NEWSLETTER
+  // =========================================================
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (email.trim()) {
-      alert(
-        "Thank you for subscribing to A&Y Consolidated Investor Briefings."
-      );
+    if (!email.trim()) return;
 
-      setEmail("");
-    }
+    setSubscribed(true);
+    setEmail("");
   };
 
-  // Active navigation style
+  // =========================================================
+  // NAVIGATION LINK STYLE
+  // =========================================================
+
   const navLinkClass = ({ isActive }) =>
-    `transition-colors ${
-      isActive
-        ? "font-bold text-[#e9c349]"
-        : "text-[#c6c6cb] hover:text-[#e9c349]"
+    `transition-colors ${isActive
+      ? "font-bold text-[#e9c349]"
+      : "text-[#c6c6cb] hover:text-[#e9c349]"
     }`;
 
-  const portfolioLinkClass = ({ isActive }) =>
-    `font-semibold transition-colors ${
-      isActive
-        ? "text-[#e9c349]"
-        : "text-[#e0e2ec] hover:text-[#e9c349]"
-    }`;
+  // =========================================================
+  // FOOTER
+  // =========================================================
 
   return (
     <footer
       id="footer"
       className="mx-auto mt-16 w-full max-w-[1280px] border-t border-[rgba(233,195,73,0.2)] bg-[#0b0e15] px-4 py-12 sm:mt-24 sm:px-6 lg:px-16"
     >
-      <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {/* =====================================================
+          MAIN FOOTER GRID
+      ====================================================== */}
 
-        {/* =====================================================
-            COLUMN 1 - BRAND PROFILE
-        ====================================================== */}
+      <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+
+        {/* ===================================================
+            COLUMN 1 — BRAND
+        ==================================================== */}
+
         <div>
+          {/* Logo */}
+
           <div className="mb-4 flex items-center gap-3">
             <div className="h-9 w-9 overflow-hidden rounded-xl border border-[rgba(233,195,73,0.3)] bg-[#0b0e15]">
               <img
                 src="/assets/icons/logo.png"
-                alt="A&Y Logo"
+                alt="A&Y Consolidated Logo"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -58,21 +64,27 @@ function Footer() {
             </span>
           </div>
 
+          {/* Description */}
+
           <p className="text-xs leading-relaxed text-[#c6c6cb] sm:text-sm">
-            Engineered Luxury. Structural Integrity. Exclusive Boutique
-            Residences in Dehiwala designed for generational equity and peace
-            of mind.
+            Building businesses with quality, integrity and purpose across
+            construction, real estate, import &amp; export, trading and
+            distribution.
           </p>
+
+          {/* Status */}
 
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(233,195,73,0.3)] bg-[rgba(233,195,73,0.08)] px-3 py-1 text-[10px] font-bold text-[#e9c349]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-            Licensed Developer | CMA Compliant
+
+            Building Long-Term Value
           </div>
         </div>
 
-        {/* =====================================================
-            COLUMN 2 - NAVIGATION
-        ====================================================== */}
+        {/* ===================================================
+            COLUMN 2 — NAVIGATION
+        ==================================================== */}
+
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
             Navigation
@@ -81,164 +93,126 @@ function Footer() {
           <ul className="space-y-2.5 text-xs">
 
             {/* HOME */}
+
             <li>
-              <NavLink to="/" className={navLinkClass}>
+              <NavLink
+                to="/"
+                end
+                className={navLinkClass}
+              >
                 Home
               </NavLink>
             </li>
 
             {/* ABOUT */}
+
             <li>
-              <NavLink to="/about" className={navLinkClass}>
+              <NavLink
+                to="/about"
+                className={navLinkClass}
+              >
                 About Us
               </NavLink>
             </li>
 
-            {/* SERVICES */}
-            <li>
-              <NavLink to="/services" className={navLinkClass}>
-                Services
-              </NavLink>
-            </li>
-
-            {/* RESIDENCES */}
-            <li>
-              <NavLink to="/residences" className={navLinkClass}>
-                Residences
-              </NavLink>
-            </li>
-
-            {/* INVESTMENT */}
-            <li>
-              <NavLink to="/investment" className={navLinkClass}>
-                Investment
-              </NavLink>
-            </li>
-
-            {/* TESTIMONIALS */}
-            <li>
-              <NavLink to="/testimonials" className={navLinkClass}>
-                Testimonials
-              </NavLink>
-            </li>
-
             {/* BLOG */}
+
             <li>
-              <NavLink to="/blog" className={navLinkClass}>
+              <NavLink
+                to="/blog"
+                className={navLinkClass}
+              >
                 Blog
               </NavLink>
             </li>
 
             {/* FAQ */}
+
             <li>
-              <NavLink to="/faq" className={navLinkClass}>
-                FAQ &amp; Due Diligence
+              <NavLink
+                to="/faq"
+                className={navLinkClass}
+              >
+                FAQ
               </NavLink>
             </li>
 
             {/* CONTACT */}
+
             <li>
-              <NavLink to="/contact" className={navLinkClass}>
-                Contact Us
+              <NavLink
+                to="/contact"
+                className={navLinkClass}
+              >
+                Contact
               </NavLink>
             </li>
+
           </ul>
         </div>
 
-        {/* =====================================================
-            COLUMN 3 - PORTFOLIOS & SUITES
-        ====================================================== */}
+        {/* ===================================================
+    COLUMN 3 — OUR BUSINESSES
+==================================================== */}
+
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
-            Portfolios &amp; Suites
+            Our Businesses
           </h4>
 
-          <ul className="space-y-2.5 text-xs text-[#c6c6cb]">
+          <ul className="space-y-3 text-xs">
 
-            {/* GRAND SUITE */}
-            <li>
-              <Link
-                to="/residences?suite=suite-a#suite-details"
-                className={`font-semibold transition-colors ${
-                  location.pathname === "/residences" && selectedSuite === "suite-a"
-                    ? "font-bold text-[#e9c349]"
-                    : "text-[#e0e2ec] hover:text-[#e9c349]"
-                }`}
-              >
-                Grand Suite A (1,425 Sq.Ft) — 3 Bed
-              </Link>
-            </li>
+            {/* CONSTRUCTION & REAL ESTATE */}
 
-            {/* EXECUTIVE SUITE */}
-            <li>
-              <Link
-                to="/residences?suite=suite-b#suite-details"
-                className={`font-semibold transition-colors ${
-                  location.pathname === "/residences" && selectedSuite === "suite-b"
-                    ? "font-bold text-[#e9c349]"
-                    : "text-[#e0e2ec] hover:text-[#e9c349]"
-                }`}
-              >
-                Compact Luxury B (1,273 Sq.Ft) — 3 Bed
-              </Link>
-            </li>
-
-            {/* ROI CALCULATOR */}
             <li>
               <NavLink
-                to="/investment-calculator"
-                className={({ isActive }) =>
-                  `mt-1 flex items-center gap-1 transition-colors ${
-                    isActive
-                      ? "font-bold text-[#e9c349]"
-                      : "text-[#e9c349] hover:underline"
-                  }`
-                }
+                to="/construction-real-estate"
+                className={navLinkClass}
               >
-                ROI &amp; Yield Calculator →
+                Construction &amp; Real Estate
               </NavLink>
             </li>
 
-            {/* BROCHURE */}
+            {/* IMPORT & EXPORT */}
+
             <li>
               <NavLink
-                to="/brochure"
-                className={({ isActive }) =>
-                  `flex items-center gap-1 transition-colors ${
-                    isActive
-                      ? "font-bold text-[#e9c349]"
-                      : "text-[#e9c349] hover:underline"
-                  }`
-                }
+                to="/import-export"
+                className={navLinkClass}
               >
-                Download Prospectus (PDF) →
+                Import &amp; Export
               </NavLink>
             </li>
 
-            {/* SOLD OUT STATUS */}
-            <li className="pt-2 text-[11px] text-[#8e9099]">
-              Kawdana Residence — 100% Sold Out
+            {/* TRADING & DISTRIBUTION */}
+
+            <li>
+              <NavLink
+                to="/trading-distribution"
+                className={navLinkClass}
+              >
+                Trading &amp; Distribution
+              </NavLink>
             </li>
 
-            {/* FULLY BOOKED STATUS */}
-            <li className="text-[11px] text-[#8e9099]">
-              Hill Street Project — Fully Booked
-            </li>
           </ul>
         </div>
 
-        {/* =====================================================
-            COLUMN 4 - VIP CONCIERGE
-        ====================================================== */}
+        {/* ===================================================
+            COLUMN 4 — CONTACT
+        ==================================================== */}
+
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
-            VIP Concierge
+            Get In Touch
           </h4>
 
-          <div className="space-y-2.5 text-xs text-[#c6c6cb]">
+          <div className="space-y-3 text-xs text-[#c6c6cb]">
 
             {/* PHONE */}
+
             <p className="flex items-center gap-2">
+
               <svg
                 className="h-4 w-4 shrink-0 text-[#e9c349]"
                 fill="none"
@@ -255,14 +229,17 @@ function Footer() {
 
               <a
                 href="tel:+94771234567"
-                className="hover:text-[#e9c349]"
+                className="transition-colors hover:text-[#e9c349]"
               >
                 +94 77 123 4567
               </a>
+
             </p>
 
             {/* EMAIL */}
+
             <p className="flex items-center gap-2">
+
               <svg
                 className="h-4 w-4 shrink-0 text-[#e9c349]"
                 fill="none"
@@ -279,100 +256,153 @@ function Footer() {
 
               <a
                 href="mailto:concierge@ayconsolidated.com"
-                className="hover:text-[#e9c349]"
+                className="transition-colors hover:text-[#e9c349]"
               >
                 concierge@ayconsolidated.com
               </a>
+
             </p>
 
             {/* ADDRESS */}
-            <p className="pt-1 text-[11px] text-[#8e9099]">
-              Level 12, Prime Tower, Marine Drive, Colombo 03
+
+            <p className="pt-1 text-[11px] leading-5 text-[#8e9099]">
+              Level 12, Prime Tower,
+              <br />
+              Marine Drive, Colombo 03
             </p>
 
             {/* WHATSAPP */}
-            <div className="mt-3">
+
+            <div className="mt-4">
+
               <a
-                href="https://wa.me/94771234567?text=Hello%20A%26Y%20Consolidated,%20I%20would%20like%20to%20inquire%20about%20the%20residences."
+                href="https://wa.me/94771234567?text=Hello%20A%26Y%20Consolidated,%20I%20would%20like%20to%20make%20an%20inquiry."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/20 px-3 py-1.5 text-[11px] font-bold text-emerald-300 transition-all hover:bg-[#25D366]/30"
               >
-                <span>Direct WhatsApp Chat</span> →
+                <span>WhatsApp Us</span>
+
+                <span aria-hidden="true">
+                  →
+                </span>
               </a>
+
             </div>
 
-            {/* =================================================
-                NEWSLETTER
-            ================================================== */}
-            <div className="mt-4 border-t border-[rgba(69,71,75,0.3)] pt-2">
-
-              <span className="mb-1.5 block text-[11px] font-semibold text-[#e0e2ec]">
-                Quarterly Investor Briefing
-              </span>
-
-              <form
-                onSubmit={handleSubmit}
-                className="flex gap-2"
-              >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Your email..."
-                  required
-                  className="w-full rounded-lg border border-[rgba(233,195,73,0.2)] bg-[#141821] px-3 py-1.5 text-xs text-white placeholder-[rgba(198,198,203,0.4)] focus:border-[#e9c349] focus:outline-none"
-                />
-
-                <button
-                  type="submit"
-                  className="cursor-pointer rounded-lg bg-[#e9c349] px-3 py-1.5 text-xs font-bold text-[#3c2f00] transition-all hover:bg-[#ffd659]"
-                >
-                  Join
-                </button>
-              </form>
-            </div>
           </div>
         </div>
+
+      </div>
+
+      {/* =====================================================
+          NEWSLETTER
+      ====================================================== */}
+
+      <div className="border-t border-[rgba(69,71,75,0.3)] pt-8">
+
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
+
+          {/* Newsletter Text */}
+
+          <div>
+
+            <span className="text-[10px] font-bold uppercase tracking-[2px] text-[#e9c349]">
+              Stay Connected
+            </span>
+
+            <h4 className="mt-2 font-display text-2xl text-[#e0e2ec]">
+              Stay updated with A&amp;Y Consolidated.
+            </h4>
+
+            <p className="mt-2 max-w-xl text-xs leading-6 text-[#8e9099]">
+              Receive company updates, business insights and important
+              announcements from the A&amp;Y team.
+            </p>
+
+          </div>
+
+          {/* Newsletter Form */}
+
+          <form
+            onSubmit={handleSubmit}
+            className="flex gap-2"
+          >
+
+            <input
+              type="email"
+              value={email}
+              onChange={(event) =>
+                setEmail(event.target.value)
+              }
+              placeholder="Your email..."
+              required
+              className="w-full rounded-lg border border-[rgba(233,195,73,0.2)] bg-[#141821] px-3 py-2 text-xs text-white placeholder:text-[#6f747f] focus:border-[#e9c349] focus:outline-none"
+            />
+
+            <button
+              type="submit"
+              className="cursor-pointer rounded-lg bg-[#e9c349] px-4 py-2 text-xs font-bold text-[#3c2f00] transition-all hover:bg-[#ffd659]"
+            >
+              Join
+            </button>
+
+          </form>
+
+          {/* Success */}
+
+          {subscribed && (
+            <p className="text-xs text-emerald-300 lg:col-start-2">
+              Thank you. You have successfully subscribed.
+            </p>
+          )}
+
+        </div>
+
       </div>
 
       {/* =====================================================
           BOTTOM LEGAL BAR
       ====================================================== */}
-      <div className="flex flex-col items-center justify-between gap-4 border-t border-[rgba(69,71,75,0.3)] pt-8 text-[11px] text-[#8e9099] sm:flex-row">
+
+      <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[rgba(69,71,75,0.3)] pt-8 text-[11px] text-[#8e9099] sm:flex-row">
+
+        {/* COPYRIGHT */}
 
         <p>
-          © 2024–2026 A&amp;Y CONSOLIDATED (PVT) LTD. ALL RIGHTS RESERVED.
+          © 2024–2026 A&amp;Y CONSOLIDATED (PVT) LTD.
+          ALL RIGHTS RESERVED.
         </p>
 
-        <div className="flex items-center gap-6">
+        {/* LEGAL LINKS */}
 
-          {/* PRIVACY */}
-          <NavLink
+        <div className="flex items-center gap-5">
+
+          <Link
             to="/privacy-terms#privacy"
-            className={navLinkClass}
+            className="transition-colors hover:text-[#e9c349]"
           >
             Privacy Policy
-          </NavLink>
+          </Link>
 
-          {/* TERMS */}
-          <NavLink
+          <Link
             to="/privacy-terms#terms"
-            className={navLinkClass}
+            className="transition-colors hover:text-[#e9c349]"
           >
             Terms of Service
-          </NavLink>
+          </Link>
 
-          {/* LEGAL DISCLAIMERS */}
-          <NavLink
+          <Link
             to="/privacy-terms#disclaimers"
-            className={navLinkClass}
+            className="transition-colors hover:text-[#e9c349]"
           >
-            Legal Disclaimers
-          </NavLink>
+            Legal
+          </Link>
 
         </div>
+
       </div>
+
     </footer>
   );
 }

@@ -961,17 +961,12 @@ function Home() {
 
                   <a
                     href="/contact?plan=suite-a#contact"
-                    className="flex h-11 items-center justify-center rounded-xl bg-[#e9c349] px-6 text-xs font-bold tracking-[1.5px] uppercase text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] hover:bg-[#ffd659] transition-all"
+                    className="flex h-11 items-center justify-center rounded-xl bg-[#e9c349] px-6 text-xs font-bold tracking-[1.5px] uppercase text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] hover:bg-[#ffd659] transition-all w-full"
                   >
                     Reserve Suite A
                   </a>
 
-                  <a
-                    href="/brochure"
-                    className="glass-panel flex h-11 items-center justify-center rounded-xl px-5 text-xs font-bold tracking-[1.5px] uppercase text-[#e0e2ec] hover:border-[#e9c349] hover:text-[#e9c349] transition-all"
-                  >
-                    Request Architectural PDF
-                  </a>
+                  
 
                 </div>
               </div>
@@ -1065,17 +1060,11 @@ function Home() {
 
                   <a
                     href="/contact?plan=suite-b#contact"
-                    className="flex h-11 items-center justify-center rounded-xl bg-[#e9c349] px-6 text-xs font-bold tracking-[1.5px] uppercase text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] hover:bg-[#ffd659] transition-all"
+                    className="flex h-11 items-center justify-center rounded-xl bg-[#e9c349] px-6 text-xs font-bold tracking-[1.5px] uppercase text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] hover:bg-[#ffd659] transition-all w-full"
                   >
                     Reserve Suite B
                   </a>
 
-                  <a
-                    href="/brochure"
-                    className="glass-panel flex h-11 items-center justify-center rounded-xl px-5 text-xs font-bold tracking-[1.5px] uppercase text-[#e0e2ec] hover:border-[#e9c349] hover:text-[#e9c349] transition-all"
-                  >
-                    Request Architectural PDF
-                  </a>
 
                 </div>
               </div>

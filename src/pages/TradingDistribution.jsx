@@ -53,7 +53,7 @@ export default function TradingDistribution() {
             HERO SECTION
         ====================================================== */}
 
-        <section className="relative min-h-[78vh] overflow-hidden border-b border-white/10">
+        <section className="relative min-h-[600px] overflow-hidden border-b border-white/10">
 
           {/* Hero Background Image */}
           <div className="absolute inset-0">
@@ -80,7 +80,7 @@ export default function TradingDistribution() {
 
 
           {/* Hero Content */}
-          <div className="relative z-10 mx-auto flex min-h-[78vh] max-w-7xl items-end px-6 pb-20 pt-36 lg:px-10">
+          <div className="relative z-10 mx-auto flex min-h-[58vh] max-w-7xl items-end px-6 pb-20 pt-36 lg:px-10">
 
             <div className="w-full">
 

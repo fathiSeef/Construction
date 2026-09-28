@@ -3,11 +3,10 @@ import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
   // =========================================================
-  // DESKTOP DROPDOWN STATES
+  // DESKTOP DROPDOWN STATE
   // =========================================================
 
   const [isBusinessOpen, setIsBusinessOpen] = useState(false);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
 
   // =========================================================
   // MOBILE MENU STATES
@@ -18,20 +17,16 @@ function Navbar() {
   const [isMobileBusinessOpen, setIsMobileBusinessOpen] =
     useState(false);
 
-  const [isMobileProjectsOpen, setIsMobileProjectsOpen] =
-    useState(false);
-
   // =========================================================
-  // REFS
+  // REF
   // =========================================================
 
   const businessMenuRef = useRef(null);
-  const projectsMenuRef = useRef(null);
 
   const location = useLocation();
 
   // =========================================================
-  // DROPDOWN ROUTES
+  // BUSINESS ROUTES
   // =========================================================
 
   const businessPaths = [
@@ -40,20 +35,11 @@ function Navbar() {
     "/trading-distribution",
   ];
 
-  const projectPaths = [
-    "/residences",
-    "/investment",
-  ];
-
   // =========================================================
-  // ACTIVE PARENT STATES
+  // ACTIVE BUSINESS STATE
   // =========================================================
 
   const isBusinessActive = businessPaths.includes(
-    location.pathname
-  );
-
-  const isProjectsActive = projectPaths.includes(
     location.pathname
   );
 
@@ -67,9 +53,7 @@ function Navbar() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-
     setIsMobileBusinessOpen(false);
-    setIsMobileProjectsOpen(false);
   };
 
   // =========================================================
@@ -83,13 +67,6 @@ function Navbar() {
         !businessMenuRef.current.contains(event.target)
       ) {
         setIsBusinessOpen(false);
-      }
-
-      if (
-        projectsMenuRef.current &&
-        !projectsMenuRef.current.contains(event.target)
-      ) {
-        setIsProjectsOpen(false);
       }
     };
 
@@ -111,10 +88,7 @@ function Navbar() {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setIsBusinessOpen(false);
-        setIsProjectsOpen(false);
-
         setIsMobileBusinessOpen(false);
-        setIsMobileProjectsOpen(false);
       }
     };
 
@@ -212,7 +186,7 @@ function Navbar() {
 
           <nav className="hidden items-center gap-8 lg:flex">
 
-            {/* HOME */}
+            {/* ================= HOME ================= */}
 
             <NavLink
               to="/"
@@ -230,7 +204,7 @@ function Navbar() {
               )}
             </NavLink>
 
-            {/* ABOUT */}
+            {/* ================= ABOUT ================= */}
 
             <NavLink
               to="/about"
@@ -259,7 +233,6 @@ function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsBusinessOpen((prev) => !prev);
-                  setIsProjectsOpen(false);
                 }}
                 className={`relative flex cursor-pointer items-center gap-2 text-[12px] font-bold tracking-[1.8px] transition ${
                   isBusinessActive
@@ -287,10 +260,14 @@ function Navbar() {
                   />
                 </svg>
 
+                {/* Parent active indicator */}
+
                 {isBusinessActive && (
                   <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
                 )}
               </button>
+
+              {/* BUSINESS DROPDOWN */}
 
               {isBusinessOpen && (
                 <div className="absolute left-1/2 top-full mt-5 w-72 -translate-x-1/2 rounded-xl border border-[rgba(233,195,73,0.25)] bg-[#10131a] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
@@ -299,7 +276,6 @@ function Navbar() {
                     to="/construction-real-estate"
                     onClick={() => {
                       setIsBusinessOpen(false);
-                      setIsProjectsOpen(false);
                     }}
                     className={dropdownItemClass}
                   >
@@ -310,7 +286,6 @@ function Navbar() {
                     to="/import-export"
                     onClick={() => {
                       setIsBusinessOpen(false);
-                      setIsProjectsOpen(false);
                     }}
                     className={dropdownItemClass}
                   >
@@ -321,7 +296,6 @@ function Navbar() {
                     to="/trading-distribution"
                     onClick={() => {
                       setIsBusinessOpen(false);
-                      setIsProjectsOpen(false);
                     }}
                     className={dropdownItemClass}
                   >
@@ -332,89 +306,15 @@ function Navbar() {
               )}
             </div>
 
-            {/* =================================================
-                PROJECTS
-            ================================================== */}
-
-            <div
-              ref={projectsMenuRef}
-              className="relative"
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  setIsProjectsOpen((prev) => !prev);
-                  setIsBusinessOpen(false);
-                }}
-                className={`relative flex cursor-pointer items-center gap-2 text-[12px] font-bold tracking-[1.8px] transition ${
-                  isProjectsActive
-                    ? "text-[#e9c349]"
-                    : "text-[#c6c6cb] hover:text-[#e9c349]"
-                }`}
-              >
-                Projects
-
-                <svg
-                  className={`h-3 w-3 transition-transform ${
-                    isProjectsOpen
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-
-                {isProjectsActive && (
-                  <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                )}
-              </button>
-
-              {isProjectsOpen && (
-                <div className="absolute left-1/2 top-full mt-5 w-56 -translate-x-1/2 rounded-xl border border-[rgba(233,195,73,0.25)] bg-[#10131a] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-
-                  <NavLink
-                    to="/residences"
-                    onClick={() => {
-                      setIsProjectsOpen(false);
-                      setIsBusinessOpen(false);
-                    }}
-                    className={dropdownItemClass}
-                  >
-                    Residences
-                  </NavLink>
-
-                  <NavLink
-                    to="/investment"
-                    onClick={() => {
-                      setIsProjectsOpen(false);
-                      setIsBusinessOpen(false);
-                    }}
-                    className={dropdownItemClass}
-                  >
-                    Investment
-                  </NavLink>
-
-                </div>
-              )}
-            </div>
-
-            {/* TESTIMONIALS */}
+            {/* ================= BLOG ================= */}
 
             <NavLink
-              to="/testimonials"
+              to="/blog"
               className={navLinkClass}
             >
               {({ isActive }) => (
                 <>
-                  Testimonials
+                  Blog
 
                   {isActive && (
                     <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
@@ -423,7 +323,7 @@ function Navbar() {
               )}
             </NavLink>
 
-            {/* FAQ */}
+            {/* ================= FAQ ================= */}
 
             <NavLink
               to="/faq"
@@ -440,7 +340,7 @@ function Navbar() {
               )}
             </NavLink>
 
-            {/* CONTACT */}
+            {/* ================= CONTACT ================= */}
 
             <NavLink
               to="/contact"
@@ -529,7 +429,7 @@ function Navbar() {
 
         <nav className="flex flex-col gap-3">
 
-          {/* HOME */}
+          {/* ================= HOME ================= */}
 
           <NavLink
             to="/"
@@ -548,7 +448,7 @@ function Navbar() {
             )}
           </NavLink>
 
-          {/* ABOUT */}
+          {/* ================= ABOUT ================= */}
 
           <NavLink
             to="/about"
@@ -574,7 +474,6 @@ function Navbar() {
             type="button"
             onClick={() => {
               setIsMobileBusinessOpen((prev) => !prev);
-              setIsMobileProjectsOpen(false);
             }}
             className={`flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-left text-[13px] font-bold tracking-[1.5px] transition-colors ${
               isBusinessActive
@@ -635,77 +534,16 @@ function Navbar() {
             </div>
           )}
 
-          {/* =================================================
-              MOBILE PROJECTS
-          ================================================== */}
-
-          <button
-            type="button"
-            onClick={() => {
-              setIsMobileProjectsOpen((prev) => !prev);
-              setIsMobileBusinessOpen(false);
-            }}
-            className={`flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-left text-[13px] font-bold tracking-[1.5px] transition-colors ${
-              isProjectsActive
-                ? "text-[#e9c349]"
-                : "text-[#c6c6cb] hover:text-[#e9c349]"
-            }`}
-          >
-            <span>Projects</span>
-
-            <svg
-              className={`h-4 w-4 transition-transform ${
-                isMobileProjectsOpen
-                  ? "rotate-180"
-                  : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-
-          {/* MOBILE PROJECT DROPDOWN */}
-
-          {isMobileProjectsOpen && (
-            <div className="ml-3 flex flex-col gap-1 border-l border-[rgba(233,195,73,0.2)] pl-4">
-
-              <NavLink
-                to="/residences"
-                onClick={closeMobileMenu}
-                className={mobileDropdownItemClass}
-              >
-                Residences
-              </NavLink>
-
-              <NavLink
-                to="/investment"
-                onClick={closeMobileMenu}
-                className={mobileDropdownItemClass}
-              >
-                Investment
-              </NavLink>
-
-            </div>
-          )}
-
-          {/* TESTIMONIALS */}
+          {/* ================= BLOG ================= */}
 
           <NavLink
-            to="/testimonials"
+            to="/blog"
             onClick={closeMobileMenu}
             className={mobileLinkClass}
           >
             {({ isActive }) => (
               <>
-                <span>Testimonials</span>
+                <span>Blog</span>
 
                 {isActive && (
                   <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
@@ -714,7 +552,7 @@ function Navbar() {
             )}
           </NavLink>
 
-          {/* FAQ */}
+          {/* ================= FAQ ================= */}
 
           <NavLink
             to="/faq"
@@ -732,7 +570,7 @@ function Navbar() {
             )}
           </NavLink>
 
-          {/* CONTACT */}
+          {/* ================= CONTACT ================= */}
 
           <NavLink
             to="/contact"

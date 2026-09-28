@@ -94,7 +94,7 @@ export default function ConstructionRealEstate() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#10131a] via-transparent to-[#10131a]/20" />
 
           {/* Hero Content */}
-          <div className="relative mx-auto flex min-h-[760px] max-w-7xl items-end px-6 pb-20 pt-40 lg:px-10">
+          <div className="relative mx-auto flex min-h-[48vh] max-w-7xl items-end px-6 pb-0 lg:px-10">
 
             <div className="max-w-4xl">
 
@@ -119,15 +119,8 @@ export default function ConstructionRealEstate() {
               <div className="mt-9 flex flex-wrap gap-4">
 
                 <Link
-                  to="/residences"
-                  className="rounded-xl bg-[#e9c349] px-7 py-3 text-xs font-bold uppercase tracking-[2px] text-[#3c2f00] shadow-[0_0_20px_rgba(233,195,73,0.15)] transition-all duration-300 hover:bg-[#ffd659] hover:shadow-[0_0_30px_rgba(233,195,73,0.3)]"
-                >
-                  View Residences
-                </Link>
-
-                <Link
                   to="/contact#contact"
-                  className="rounded-xl border border-white/20 bg-black/20 px-7 py-3 text-xs font-bold uppercase tracking-[2px] text-white backdrop-blur-sm transition-all duration-300 hover:border-[#e9c349]/50 hover:text-[#e9c349]"
+                  className="rounded-xl bg-[#e9c349] px-7 py-3 text-xs font-bold uppercase tracking-[2px] text-[#3c2f00] shadow-[0_0_20px_rgba(233,195,73,0.15)] transition-all duration-300 hover:bg-[#ffd659] hover:shadow-[0_0_30px_rgba(233,195,73,0.3)]"
                 >
                   Discuss a Requirement
                 </Link>
@@ -211,12 +204,11 @@ export default function ConstructionRealEstate() {
               </div>
 
               <Link
-                to="/investment"
+                to="/contact#contact"
                 className="mt-9 inline-block text-xs font-bold uppercase tracking-[2px] text-[#e9c349] transition-colors hover:text-[#ffd659]"
               >
-                Explore Investment Information →
+                Discuss This Development →
               </Link>
-
             </div>
 
             {/* Featured Image */}
