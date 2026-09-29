@@ -271,96 +271,12 @@ function Footer() {
               Marine Drive, Colombo 03
             </p>
 
-            {/* WHATSAPP */}
-
-            <div className="mt-4">
-
-              <a
-                href="https://wa.me/94771234567?text=Hello%20A%26Y%20Consolidated,%20I%20would%20like%20to%20make%20an%20inquiry."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/20 px-3 py-1.5 text-[11px] font-bold text-emerald-300 transition-all hover:bg-[#25D366]/30"
-              >
-                <span>WhatsApp Us</span>
-
-                <span aria-hidden="true">
-                  →
-                </span>
-              </a>
-
-            </div>
-
           </div>
         </div>
 
       </div>
 
-      {/* =====================================================
-          NEWSLETTER
-      ====================================================== */}
-
-      <div className="border-t border-[rgba(69,71,75,0.3)] pt-8">
-
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
-
-          {/* Newsletter Text */}
-
-          <div>
-
-            <span className="text-[10px] font-bold uppercase tracking-[2px] text-[#e9c349]">
-              Stay Connected
-            </span>
-
-            <h4 className="mt-2 font-display text-2xl text-[#e0e2ec]">
-              Stay updated with A&amp;Y Consolidated.
-            </h4>
-
-            <p className="mt-2 max-w-xl text-xs leading-6 text-[#8e9099]">
-              Receive company updates, business insights and important
-              announcements from the A&amp;Y team.
-            </p>
-
-          </div>
-
-          {/* Newsletter Form */}
-
-          <form
-            onSubmit={handleSubmit}
-            className="flex gap-2"
-          >
-
-            <input
-              type="email"
-              value={email}
-              onChange={(event) =>
-                setEmail(event.target.value)
-              }
-              placeholder="Your email..."
-              required
-              className="w-full rounded-lg border border-[rgba(233,195,73,0.2)] bg-[#141821] px-3 py-2 text-xs text-white placeholder:text-[#6f747f] focus:border-[#e9c349] focus:outline-none"
-            />
-
-            <button
-              type="submit"
-              className="cursor-pointer rounded-lg bg-[#e9c349] px-4 py-2 text-xs font-bold text-[#3c2f00] transition-all hover:bg-[#ffd659]"
-            >
-              Join
-            </button>
-
-          </form>
-
-          {/* Success */}
-
-          {subscribed && (
-            <p className="text-xs text-emerald-300 lg:col-start-2">
-              Thank you. You have successfully subscribed.
-            </p>
-          )}
-
-        </div>
-
-      </div>
-
+      
       {/* =====================================================
           BOTTOM LEGAL BAR
       ====================================================== */}

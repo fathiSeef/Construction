@@ -94,7 +94,7 @@ export default function ConstructionRealEstate() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#10131a] via-transparent to-[#10131a]/20" />
 
           {/* Hero Content */}
-          <div className="relative mx-auto flex min-h-[48vh] max-w-7xl items-end px-6 pb-0 lg:px-10">
+          <div className="relative mx-auto flex min-h-[48vh] pt-50 max-w-7xl items-end px-6 pb-0 lg:px-10">
 
             <div className="max-w-4xl">
 
