@@ -4,7 +4,7 @@ function WhatsappBtn() {
     return (
         <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50">
             <a
-                href="https://wa.me/94771234567?text=Hello%20A%26Y%20Consolidated,%20I%20would%20like%20to%20inquire%20about%20the%20residences."
+                href="https://wa.me/779595202?text=Hello%20A%26Y%20Consolidated,%20I%20would%20like%20to%20inquire%20about%20the%20residences."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_30px_rgba(0,0,0,0.5),0_0_25px_rgba(37,211,102,0.6)] hover:bg-[#20bd5a] hover:scale-110 hover:shadow-[0_12px_40px_rgba(37,211,102,0.8)] transition-all duration-300 active:scale-95 border-2 border-white/30"

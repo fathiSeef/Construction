@@ -4,8 +4,6 @@ function Footer() {
   // =========================================================
   // BUSINESS VIDEO STAGE MAP
   //
-  // These are navigation identifiers only.
-  //
   // 0 → Construction
   // 1 → Import & Export
   // 2 → Trading & Distribution
@@ -27,9 +25,7 @@ function Footer() {
 
     while (currentElement) {
       top += currentElement.offsetTop;
-
-      currentElement =
-        currentElement.offsetParent;
+      currentElement = currentElement.offsetParent;
     }
 
     return top;
@@ -39,40 +35,18 @@ function Footer() {
   // SCROLL TO SECTION
   // =========================================================
 
-  const scrollToSection = (
-    sectionId
-  ) => {
+  const scrollToSection = (sectionId) => {
     // =======================================================
     // BUSINESS VIDEO NAVIGATION
     // =======================================================
 
-    if (
-      businessStages[sectionId] !==
-      undefined
-    ) {
-      const stageIndex =
-        businessStages[
-          sectionId
-        ];
-
-      /*
-        Home.jsx handles the actual pinned
-        ScrollTrigger position.
-
-        0 → Construction frame 001
-        1 → Import & Export frame 001
-        2 → Distribution frame 001
-      */
+    if (businessStages[sectionId] !== undefined) {
+      const stageIndex = businessStages[sectionId];
 
       if (
-        typeof window
-          .__businessScrollToStage ===
-        "function"
+        typeof window.__businessScrollToStage === "function"
       ) {
-        window.__businessScrollToStage(
-          stageIndex
-        );
-
+        window.__businessScrollToStage(stageIndex);
         return;
       }
 
@@ -81,9 +55,7 @@ function Footer() {
       // =====================================================
 
       const businessElement =
-        document.getElementById(
-          "businesses"
-        );
+        document.getElementById("businesses");
 
       if (!businessElement) {
         return;
@@ -92,16 +64,12 @@ function Footer() {
       const headerHeight = 73;
 
       const elementTop =
-        getDocumentTop(
-          businessElement
-        );
+        getDocumentTop(businessElement);
 
-      const targetPosition =
-        Math.max(
-          0,
-          elementTop -
-            headerHeight
-        );
+      const targetPosition = Math.max(
+        0,
+        elementTop - headerHeight
+      );
 
       window.scrollTo({
         top: targetPosition,
@@ -115,13 +83,12 @@ function Footer() {
     // NORMAL SECTION
     //
     // Home
+    // Our Team
     // Contact
     // =======================================================
 
     const element =
-      document.getElementById(
-        sectionId
-      );
+      document.getElementById(sectionId);
 
     if (!element) {
       return;
@@ -132,12 +99,10 @@ function Footer() {
     const elementTop =
       getDocumentTop(element);
 
-    const targetPosition =
-      Math.max(
-        0,
-        elementTop -
-          headerHeight
-      );
+    const targetPosition = Math.max(
+      0,
+      elementTop - headerHeight
+    );
 
     // =======================================================
     // URL
@@ -168,8 +133,9 @@ function Footer() {
   return (
     <footer
       id="footer"
-      className="mx-auto mt-16 w-full max-w-[1280px] border-t border-[rgba(233,195,73,0.2)] bg-[#0b0e15] px-4 py-12 sm:mt-24 sm:px-6 lg:px-16"
+      className="mt-16 w-full border-t border-[rgba(233,195,73,0.2)] bg-[#0b0e15] py-12 sm:mt-24"
     >
+      <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10 xl:px-16">
       {/* =====================================================
           MAIN FOOTER GRID
       ====================================================== */}
@@ -187,9 +153,7 @@ function Footer() {
           <button
             type="button"
             onClick={() =>
-              scrollToSection(
-                "home"
-              )
+              scrollToSection("home")
             }
             className="mb-4 flex items-center gap-3"
           >
@@ -244,9 +208,7 @@ function Footer() {
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection(
-                    "home"
-                  )
+                  scrollToSection("home")
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -302,15 +264,27 @@ function Footer() {
               </button>
             </li>
 
+            {/* OUR TEAM */}
+
+            <li>
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("team")
+                }
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
+              >
+                Our Team
+              </button>
+            </li>
+
             {/* CONTACT */}
 
             <li>
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection(
-                    "location"
-                  )
+                  scrollToSection("location")
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -319,6 +293,7 @@ function Footer() {
             </li>
 
           </ul>
+
         </div>
 
         {/* ===================================================
@@ -384,10 +359,11 @@ function Footer() {
             </li>
 
           </ul>
+
         </div>
 
         {/* ===================================================
-            COLUMN 4 — CONTACT
+            COLUMN 4 — GET IN TOUCH
         ==================================================== */}
 
         <div>
@@ -398,7 +374,9 @@ function Footer() {
 
           <div className="space-y-3 text-xs text-[#c6c6cb]">
 
-            {/* PHONE */}
+            {/* =================================================
+                PHONE 1
+            ================================================== */}
 
             <p className="flex items-center gap-2">
 
@@ -417,15 +395,36 @@ function Footer() {
               </svg>
 
               <a
-                href="tel:+94771234567"
+                href="tel:+94779595202"
                 className="transition-colors hover:text-[#e9c349]"
               >
-                +94 77 123 4567
+                077 959 5202
+              </a>
+
+              <span>/</span>
+
+              <a
+                href="tel:+94713533202"
+                className="transition-colors hover:text-[#e9c349]"
+              >
+                071 353 3202
               </a>
 
             </p>
 
-            {/* EMAIL */}
+            {/* =================================================
+                PHONE 2
+            ================================================== */}
+
+            <p className="flex items-center gap-2">
+
+              
+
+            </p>
+
+            {/* =================================================
+                EMAIL
+            ================================================== */}
 
             <p className="flex items-center gap-2">
 
@@ -444,32 +443,84 @@ function Footer() {
               </svg>
 
               <a
-                href="mailto:concierge@ayconsolidated.com"
+                href="mailto:info@ayconsolidated.com"
                 className="transition-colors hover:text-[#e9c349]"
               >
-                concierge@ayconsolidated.com
+                info@ayconsolidated.com
               </a>
 
             </p>
 
-            {/* ADDRESS */}
+            <p className="flex items-center gap-2">
+
+              <svg
+                className="h-4 w-4 shrink-0 text-[#e9c349]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+
+              <a
+                href="mailto:info@ayconsolidated.com"
+                className="transition-colors hover:text-[#e9c349]"
+              >
+                a&yconsolidated@gmail.com
+              </a>
+
+            </p>
+
+            {/* =================================================
+                ADDRESS
+            ================================================== */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToSection(
-                  "location"
-                )
+                scrollToSection("location")
               }
-              className="pt-1 text-left text-[11px] leading-5 text-[#8e9099] transition-colors hover:text-[#e9c349]"
+              className="flex items-start gap-2 pt-1 text-left text-[11px] leading-5 text-[#8e9099] transition-colors hover:text-[#e9c349]"
             >
-              No 55/1 B, Nikape Road,
-              <br />
-              Nedimala, Dehiwala
+
+              <svg
+                className="mt-0.5 h-4 w-4 shrink-0 text-[#e9c349]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+
+              <span>
+                No 55/1 B, Nikape Road,
+                <br />
+                Nedimala, Dehiwala
+              </span>
+
             </button>
 
           </div>
+
         </div>
+
       </div>
 
       {/* =====================================================
@@ -490,24 +541,36 @@ function Footer() {
 
         <div className="flex items-center gap-5">
 
+          {/* HOME */}
+
           <button
             type="button"
             onClick={() =>
-              scrollToSection(
-                "home"
-              )
+              scrollToSection("home")
             }
             className="transition-colors hover:text-[#e9c349]"
           >
             Home
           </button>
 
+          {/* OUR TEAM */}
+
           <button
             type="button"
             onClick={() =>
-              scrollToSection(
-                "location"
-              )
+              scrollToSection("team")
+            }
+            className="transition-colors hover:text-[#e9c349]"
+          >
+            Our Team
+          </button>
+
+          {/* CONTACT */}
+
+          <button
+            type="button"
+            onClick={() =>
+              scrollToSection("location")
             }
             className="transition-colors hover:text-[#e9c349]"
           >
@@ -515,7 +578,10 @@ function Footer() {
           </button>
 
         </div>
+
       </div>
+      </div>
+
     </footer>
   );
 }

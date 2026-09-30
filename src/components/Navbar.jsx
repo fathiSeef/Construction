@@ -18,14 +18,11 @@ function Navbar() {
   // =========================================================
   // NAVIGATION IDs
   //
-  // IMPORTANT:
-  //
   // progression-section-1 = Construction
   // progression-section-2 = Import & Export
   // progression-section-3 = Distribution
+  // team = Our Team
   //
-  // These are navigation identifiers only.
-  // They are NOT separate DOM sections anymore.
   // =========================================================
 
   const sections = [
@@ -44,6 +41,10 @@ function Navbar() {
     {
       id: "progression-section-3",
       label: "Distribution",
+    },
+    {
+      id: "team",
+      label: "Our Team",
     },
     {
       id: "location",
@@ -99,6 +100,7 @@ function Navbar() {
   // Normal sections:
   //
   // Home
+  // Our Team
   // Location
   //
   // Business stages are handled using the actual
@@ -115,10 +117,15 @@ function Navbar() {
       const activationPoint =
         scrollPosition + 100;
 
-      let currentSection = "home";
+      // Start with no active navigation item.
+      //
+      // This is important for the small transition area
+      // between the pinned Business section and Our Team.
+      // Home should NOT remain active in that gap.
+      let currentSection = "";
 
       // =====================================================
-      // HOME
+      // SECTION ELEMENTS
       // =====================================================
 
       const homeElement =
@@ -129,10 +136,47 @@ function Navbar() {
           "businesses"
         );
 
+      const teamElement =
+        document.getElementById(
+          "team"
+        );
+
       const locationElement =
         document.getElementById(
           "location"
         );
+
+      const homeTop = homeElement
+        ? getDocumentTop(homeElement)
+        : 0;
+
+      const businessTop = businessElement
+        ? getDocumentTop(businessElement)
+        : null;
+
+      const teamTop = teamElement
+        ? getDocumentTop(teamElement)
+        : null;
+
+      const locationTop = locationElement
+        ? getDocumentTop(locationElement)
+        : null;
+
+      // =====================================================
+      // HOME
+      //
+      // Home is active ONLY while the user is inside
+      // the actual Hero/Home section.
+      // =====================================================
+
+      if (
+        homeElement &&
+        activationPoint >= homeTop &&
+        businessTop !== null &&
+        activationPoint < businessTop
+      ) {
+        currentSection = "home";
+      }
 
       // =====================================================
       // BUSINESS SECTION
@@ -145,12 +189,10 @@ function Navbar() {
       // Video 3 = Distribution
       // =====================================================
 
-      if (businessElement) {
-        const businessTop =
-          getDocumentTop(
-            businessElement
-          );
-
+      if (
+        businessTop !== null &&
+        activationPoint >= businessTop
+      ) {
         const totalBusinessScroll =
           3600 * 3;
 
@@ -158,11 +200,13 @@ function Navbar() {
           businessTop +
           totalBusinessScroll;
 
+        // ===================================================
+        // INSIDE PINNED BUSINESS VIDEO SECTION
+        // ===================================================
+
         if (
-          activationPoint >=
-            businessTop &&
           activationPoint <
-            businessEnd
+          businessEnd
         ) {
           const progress =
             Math.max(
@@ -196,6 +240,48 @@ function Navbar() {
               "progression-section-3";
           }
         }
+
+        // ===================================================
+        // TRANSITION GAP
+        //
+        // Business section has finished but Our Team
+        // has not started yet.
+        //
+        // Keep every navigation item inactive here.
+        // ===================================================
+
+        else if (
+          teamTop !== null &&
+          activationPoint < teamTop
+        ) {
+          currentSection = "";
+        }
+
+        // ===================================================
+        // OUR TEAM
+        // ===================================================
+
+        else if (
+          teamTop !== null &&
+          activationPoint >= teamTop
+        ) {
+          currentSection = "team";
+        }
+      }
+
+      // =====================================================
+      // OUR TEAM
+      //
+      // This also handles cases where businessTop is not
+      // available for any reason.
+      // =====================================================
+
+      if (
+        currentSection === "" &&
+        teamTop !== null &&
+        activationPoint >= teamTop
+      ) {
+        currentSection = "team";
       }
 
       // =====================================================
@@ -203,29 +289,10 @@ function Navbar() {
       // =====================================================
 
       if (
-        locationElement &&
-        activationPoint >=
-          getDocumentTop(
-            locationElement
-          )
+        locationTop !== null &&
+        activationPoint >= locationTop
       ) {
-        currentSection =
-          "location";
-      }
-
-      // =====================================================
-      // HOME
-      // =====================================================
-
-      if (
-        homeElement &&
-        activationPoint <
-          getDocumentTop(
-            homeElement
-          )
-      ) {
-        currentSection =
-          "home";
+        currentSection = "location";
       }
 
       // =====================================================
@@ -291,7 +358,7 @@ function Navbar() {
   }, []);
 
   // =========================================================
-  // SCROLL TO HOME SECTION
+  // SCROLL TO SECTION
   // =========================================================
 
   const scrollToHomeSection = (
@@ -389,6 +456,7 @@ function Navbar() {
     // NORMAL SECTION NAVIGATION
     //
     // Home
+    // Our Team
     // Contact
     // =======================================================
 
@@ -690,6 +758,26 @@ function Navbar() {
               />
             </button>
 
+            {/* OUR TEAM */}
+
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection(
+                  "team"
+                )
+              }
+              className={desktopLinkClass(
+                "team"
+              )}
+            >
+              Our Team
+
+              <DesktopActiveDot
+                sectionId="team"
+              />
+            </button>
+
             {/* CONTACT */}
 
             <button
@@ -870,6 +958,28 @@ function Navbar() {
             />
           </button>
 
+          {/* OUR TEAM */}
+
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection(
+                "team"
+              )
+            }
+            className={mobileLinkClass(
+              "team"
+            )}
+          >
+            <span>
+              Our Team
+            </span>
+
+            <MobileActiveDot
+              sectionId="team"
+            />
+          </button>
+
           {/* CONTACT */}
 
           <button
@@ -883,7 +993,9 @@ function Navbar() {
               "location"
             )}
           >
-            <span>Contact</span>
+            <span>
+              Contact
+            </span>
 
             <MobileActiveDot
               sectionId="location"

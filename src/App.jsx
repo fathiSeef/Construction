@@ -8,7 +8,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          {/* ================= HOME / SPA ================= */}
 
           <Route path="/" element={<Home />} />
         </Route>
