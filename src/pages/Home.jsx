@@ -1370,7 +1370,7 @@ function CompanyShowcase() {
 
         <div className="mt-7 flex items-center justify-between">
           <span className="text-[8px] font-mono uppercase tracking-[2.5px] text-[#555a65]">
-            A&amp;Y CONSOLIDATED (PVT, LTD)
+            A&amp;Y CONSOLIDATED (PVT) LTD
           </span>
           <span className="text-[8px] font-mono uppercase tracking-[2.5px] text-[#555a65]">
             Excellence · Integrity · Quality
@@ -1484,9 +1484,10 @@ function Home() {
           "
                 >
                   A&amp;Y CONSOLIDATED
-                  <span className="ml-2 text-[#e9c349]">
-                    (PVT, LTD)
+                  <span className="ml-2 text-[#e9c349] mr-2">
+                    (PVT)  
                   </span>
+                  LTD
                 </h1>
 
                 {/* Elegant gold line */}
