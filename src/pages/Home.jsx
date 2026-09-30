@@ -14,8 +14,6 @@ function BuildProgression({
   titleLine1,
   titleLine2,
   description,
-  buttonText,
-  buttonHref = "#location",
 }) {
   const canvasRef = useRef(null);
   const progressionRef = useRef(null);
@@ -268,26 +266,7 @@ function BuildProgression({
               {description}
             </p>
 
-            <a
-              href={buttonHref}
-              className="inline-flex items-center gap-2.5 rounded-xl border border-[rgba(233,195,73,0.8)] bg-[rgba(233,195,73,0.1)] backdrop-blur-md px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-[13px] font-bold uppercase tracking-[1.8px] text-[#e9c349] hover:bg-[#e9c349] hover:text-[#10131a] transition-all duration-300 shadow-[0_0_25px_rgba(233,195,73,0.25)] pointer-events-auto"
-            >
-              <span>{buttonText}</span>
 
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </a>
           </div>
         </div>
       </div>
@@ -368,48 +347,44 @@ function Home() {
         </section>
 
         {/* =====================================================
-          SECTION 3: BUILD PROGRESSION 1
-        ====================================================== */}
+    SECTION 3: REAL ESTATE & CONSTRUCTION
+====================================================== */}
 
         <BuildProgression
           sectionId="progression-section-1"
           framePath="/assets/video/webp"
-          eyebrow="A&Y CONSOLIDATED"
+          eyebrow="REAL ESTATE & CONSTRUCTION"
           titleLine1="Every Legacy"
           titleLine2="Starts With Solid Ground"
-          description="From deep bored piling to bedrock to reinforced raft foundations, engineered with precision for seismic resilience and generational equity."
-          buttonText="Explore Build Specs"
-          buttonHref="#location"
+          description="From apartment and house construction to property buying, selling and lease arrangements, we deliver complete real estate and construction services with a focus on quality, reliability and lasting value."
         />
 
+
         {/* =====================================================
-          SECTION 4: BUILD PROGRESSION 2
-        ====================================================== */}
+    SECTION 4: IMPORT & EXPORT
+====================================================== */}
 
         <BuildProgression
           sectionId="progression-section-2"
           framePath="/assets/video/webp-2"
-          eyebrow="PRECISION IN EVERY DETAIL"
-          titleLine1="Built With Purpose"
-          titleLine2="Crafted To Last"
-          description="Every stage of construction is carefully coordinated, from structural work to finishing details, with a focus on quality, durability and long-term value."
-          buttonText="Explore Construction"
-          buttonHref="#location"
+          eyebrow="IMPORT & EXPORT"
+          titleLine1="Connecting Markets"
+          titleLine2="Beyond Borders"
+          description="Our import and export services cover vehicle imports, vehicle spare parts importing and general export services, creating reliable solutions for businesses and customers across different markets."
         />
 
+
         {/* =====================================================
-          SECTION 5: BUILD PROGRESSION 3
-        ====================================================== */}
+    SECTION 5: TRADING & DISTRIBUTION
+====================================================== */}
 
         <BuildProgression
           sectionId="progression-section-3"
           framePath="/assets/video/webp-3"
-          eyebrow="FROM VISION TO REALITY"
-          titleLine1="See The Process"
-          titleLine2="Come To Life"
-          description="Follow the transformation from the early construction stages to the completed development through a smooth frame-by-frame visual journey."
-          buttonText="Discover The Journey"
-          buttonHref="#location"
+          eyebrow="TRADING & DISTRIBUTION"
+          titleLine1="Supplying With Purpose"
+          titleLine2="Built For Every Need"
+          description="From construction materials and garment items to vehicle spare parts, we provide buying, selling and wholesale distribution services designed to connect essential products with the markets that need them."
         />
 
         {/* =====================================================

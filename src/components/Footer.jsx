@@ -1,32 +1,46 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
 
 function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
 
   // =========================================================
-  // NEWSLETTER
+  // DIRECT JUMP TO HOME SECTION
   // =========================================================
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
 
-    if (!email.trim()) return;
+    if (!element) return;
 
-    setSubscribed(true);
-    setEmail("");
+    const headerHeight = 73;
+
+    let elementTop = 0;
+    let currentElement = element;
+
+    while (currentElement) {
+      elementTop += currentElement.offsetTop;
+      currentElement = currentElement.offsetParent;
+    }
+
+    const targetPosition = Math.max(
+      0,
+      elementTop - headerHeight
+    );
+
+    // Update URL without page reload
+    window.history.replaceState(
+      null,
+      "",
+      sectionId === "home"
+        ? "/"
+        : `/#${sectionId}`
+    );
+
+    // DIRECT JUMP
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "auto",
+    });
   };
-
-  // =========================================================
-  // NAVIGATION LINK STYLE
-  // =========================================================
-
-  const navLinkClass = ({ isActive }) =>
-    `transition-colors ${isActive
-      ? "font-bold text-[#e9c349]"
-      : "text-[#c6c6cb] hover:text-[#e9c349]"
-    }`;
 
   // =========================================================
   // FOOTER
@@ -37,6 +51,7 @@ function Footer() {
       id="footer"
       className="mx-auto mt-16 w-full max-w-[1280px] border-t border-[rgba(233,195,73,0.2)] bg-[#0b0e15] px-4 py-12 sm:mt-24 sm:px-6 lg:px-16"
     >
+
       {/* =====================================================
           MAIN FOOTER GRID
       ====================================================== */}
@@ -48,9 +63,14 @@ function Footer() {
         ==================================================== */}
 
         <div>
+
           {/* Logo */}
 
-          <div className="mb-4 flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => scrollToSection("home")}
+            className="mb-4 flex items-center gap-3"
+          >
             <div className="h-9 w-9 overflow-hidden rounded-xl border border-[rgba(233,195,73,0.3)] bg-[#0b0e15]">
               <img
                 src="/assets/icons/logo.png"
@@ -62,7 +82,7 @@ function Footer() {
             <span className="font-display text-lg font-bold text-[#e0e2ec]">
               A&amp;Y CONSOLIDATED
             </span>
-          </div>
+          </button>
 
           {/* Description */}
 
@@ -79,13 +99,16 @@ function Footer() {
 
             Building Long-Term Value
           </div>
+
         </div>
+
 
         {/* ===================================================
             COLUMN 2 — NAVIGATION
         ==================================================== */}
 
         <div>
+
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
             Navigation
           </h4>
@@ -95,67 +118,86 @@ function Footer() {
             {/* HOME */}
 
             <li>
-              <NavLink
-                to="/"
-                end
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() => scrollToSection("home")}
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Home
-              </NavLink>
+              </button>
             </li>
 
-            {/* ABOUT */}
+
+            {/* CONSTRUCTION */}
 
             <li>
-              <NavLink
-                to="/about"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-1")
+                }
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
-                About Us
-              </NavLink>
+                Construction
+              </button>
             </li>
 
-            {/* BLOG */}
+
+            {/* IMPORT & EXPORT */}
 
             <li>
-              <NavLink
-                to="/blog"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-2")
+                }
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
-                Blog
-              </NavLink>
+                Import &amp; Export
+              </button>
             </li>
 
-            {/* FAQ */}
+
+            {/* DISTRIBUTION */}
 
             <li>
-              <NavLink
-                to="/faq"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-3")
+                }
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
-                FAQ
-              </NavLink>
+                Distribution
+              </button>
             </li>
+
 
             {/* CONTACT */}
 
             <li>
-              <NavLink
-                to="/contact"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("location")
+                }
+                className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Contact
-              </NavLink>
+              </button>
             </li>
 
           </ul>
+
         </div>
 
+
         {/* ===================================================
-    COLUMN 3 — OUR BUSINESSES
-==================================================== */}
+            COLUMN 3 — OUR BUSINESSES
+        ==================================================== */}
 
         <div>
+
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
             Our Businesses
           </h4>
@@ -165,44 +207,58 @@ function Footer() {
             {/* CONSTRUCTION & REAL ESTATE */}
 
             <li>
-              <NavLink
-                to="/construction-real-estate"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-1")
+                }
+                className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Construction &amp; Real Estate
-              </NavLink>
+              </button>
             </li>
+
 
             {/* IMPORT & EXPORT */}
 
             <li>
-              <NavLink
-                to="/import-export"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-2")
+                }
+                className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Import &amp; Export
-              </NavLink>
+              </button>
             </li>
+
 
             {/* TRADING & DISTRIBUTION */}
 
             <li>
-              <NavLink
-                to="/trading-distribution"
-                className={navLinkClass}
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("progression-section-3")
+                }
+                className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Trading &amp; Distribution
-              </NavLink>
+              </button>
             </li>
 
           </ul>
+
         </div>
+
 
         {/* ===================================================
             COLUMN 4 — CONTACT
         ==================================================== */}
 
         <div>
+
           <h4 className="mb-4 text-xs font-bold uppercase tracking-[1.8px] text-[#e9c349]">
             Get In Touch
           </h4>
@@ -236,6 +292,7 @@ function Footer() {
 
             </p>
 
+
             {/* EMAIL */}
 
             <p className="flex items-center gap-2">
@@ -263,22 +320,30 @@ function Footer() {
 
             </p>
 
+
             {/* ADDRESS */}
 
-            <p className="pt-1 text-[11px] leading-5 text-[#8e9099]">
+            <button
+              type="button"
+              onClick={() =>
+                scrollToSection("location")
+              }
+              className="pt-1 text-left text-[11px] leading-5 text-[#8e9099] transition-colors hover:text-[#e9c349]"
+            >
               Level 12, Prime Tower,
               <br />
               Marine Drive, Colombo 03
-            </p>
+            </button>
 
           </div>
+
         </div>
 
       </div>
 
-      
+
       {/* =====================================================
-          BOTTOM LEGAL BAR
+          BOTTOM BAR
       ====================================================== */}
 
       <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[rgba(69,71,75,0.3)] pt-8 text-[11px] text-[#8e9099] sm:flex-row">
@@ -290,30 +355,27 @@ function Footer() {
           ALL RIGHTS RESERVED.
         </p>
 
-        {/* LEGAL LINKS */}
+        {/* CURRENT SITE STRUCTURE */}
 
         <div className="flex items-center gap-5">
 
-          <Link
-            to="/privacy-terms#privacy"
+          <button
+            type="button"
+            onClick={() => scrollToSection("home")}
             className="transition-colors hover:text-[#e9c349]"
           >
-            Privacy Policy
-          </Link>
+            Home
+          </button>
 
-          <Link
-            to="/privacy-terms#terms"
+          <button
+            type="button"
+            onClick={() =>
+              scrollToSection("location")
+            }
             className="transition-colors hover:text-[#e9c349]"
           >
-            Terms of Service
-          </Link>
-
-          <Link
-            to="/privacy-terms#disclaimers"
-            className="transition-colors hover:text-[#e9c349]"
-          >
-            Legal
-          </Link>
+            Contact
+          </button>
 
         </div>
 

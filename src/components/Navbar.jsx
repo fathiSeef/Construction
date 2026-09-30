@@ -1,47 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 function Navbar() {
   // =========================================================
-  // DESKTOP DROPDOWN STATE
-  // =========================================================
-
-  const [isBusinessOpen, setIsBusinessOpen] = useState(false);
-
-  // =========================================================
-  // MOBILE MENU STATES
+  // MOBILE MENU STATE
   // =========================================================
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const [isMobileBusinessOpen, setIsMobileBusinessOpen] =
-    useState(false);
-
   // =========================================================
-  // REF
+  // ACTIVE SECTION STATE
   // =========================================================
 
-  const businessMenuRef = useRef(null);
-
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState("home");
 
   // =========================================================
-  // BUSINESS ROUTES
+  // NAVIGATION SECTIONS
   // =========================================================
 
-  const businessPaths = [
-    "/construction-real-estate",
-    "/import-export",
-    "/trading-distribution",
+  const sections = [
+    {
+      id: "home",
+      label: "Home",
+    },
+    {
+      id: "progression-section-1",
+      label: "Construction",
+    },
+    {
+      id: "progression-section-2",
+      label: "Import & Export",
+    },
+    {
+      id: "progression-section-3",
+      label: "Distribution",
+    },
+    {
+      id: "location",
+      label: "Contact",
+    },
   ];
-
-  // =========================================================
-  // ACTIVE BUSINESS STATE
-  // =========================================================
-
-  const isBusinessActive = businessPaths.includes(
-    location.pathname
-  );
 
   // =========================================================
   // MOBILE MENU
@@ -53,32 +50,133 @@ function Navbar() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-    setIsMobileBusinessOpen(false);
   };
 
   // =========================================================
-  // DESKTOP OUTSIDE CLICK
+  // GET ELEMENT DOCUMENT POSITION
+  // =========================================================
+  // This is intentionally based on offsetTop instead of
+  // getBoundingClientRect().
+  //
+  // Your BuildProgression sections use GSAP pinning.
+  // offsetTop gives us the original document position and
+  // therefore works more reliably with pinned sections.
+  // =========================================================
+
+  const getDocumentTop = (element) => {
+    let top = 0;
+    let currentElement = element;
+
+    while (currentElement) {
+      top += currentElement.offsetTop;
+      currentElement = currentElement.offsetParent;
+    }
+
+    return top;
+  };
+
+  // =========================================================
+  // UPDATE ACTIVE SECTION
   // =========================================================
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        businessMenuRef.current &&
-        !businessMenuRef.current.contains(event.target)
-      ) {
-        setIsBusinessOpen(false);
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY;
+
+      // Header height + small buffer
+      const activationPoint = scrollPosition + 100;
+
+      let currentSection = "home";
+
+      sections.forEach((section) => {
+        const element = document.getElementById(section.id);
+
+        if (!element) return;
+
+        const sectionTop = getDocumentTop(element);
+
+        if (activationPoint >= sectionTop) {
+          currentSection = section.id;
+        }
+      });
+
+      setActiveSection((previousSection) => {
+        if (previousSection === currentSection) {
+          return previousSection;
+        }
+
+        return currentSection;
+      });
+
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    const handleResize = () => {
+      updateActiveSection();
+    };
+
+    // Initial check
+    updateActiveSection();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleOutsideClick
-      );
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // =========================================================
+  // SCROLL TO SECTION
+  // =========================================================
+
+  const scrollToHomeSection = (sectionId) => {
+    closeMobileMenu();
+
+    const element = document.getElementById(sectionId);
+
+    if (!element) return;
+
+    const headerHeight = 73;
+
+    const elementTop = getDocumentTop(element);
+
+    const targetPosition = Math.max(
+      0,
+      elementTop - headerHeight
+    );
+
+    // Immediately update active navigation
+    setActiveSection(sectionId);
+
+    // Update URL without reloading
+    window.history.replaceState(
+      null,
+      "",
+      sectionId === "home"
+        ? "/"
+        : `/#${sectionId}`
+    );
+
+    // DIRECT JUMP — no smooth scrolling
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "auto",
+    });
+  };
 
   // =========================================================
   // ESC KEY
@@ -87,18 +185,32 @@ function Navbar() {
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
-        setIsBusinessOpen(false);
-        setIsMobileBusinessOpen(false);
+        setIsMobileMenuOpen(false);
       }
     };
 
     document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleEscape
-      );
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  // =========================================================
+  // CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+  // =========================================================
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -106,45 +218,45 @@ function Navbar() {
   // DESKTOP NAV LINK STYLE
   // =========================================================
 
-  const navLinkClass = ({ isActive }) =>
-    `relative text-[12px] font-bold tracking-[1.8px] transition ${
-      isActive
-        ? "text-[#e9c349]"
-        : "text-[#c6c6cb] hover:text-[#e9c349]"
+  const desktopLinkClass = (sectionId) =>
+    `relative cursor-pointer text-[12px] font-bold tracking-[1.8px] transition-colors duration-300 ${activeSection === sectionId
+      ? "text-[#e9c349]"
+      : "text-[#c6c6cb] hover:text-[#e9c349]"
     }`;
 
   // =========================================================
   // MOBILE NAV LINK STYLE
   // =========================================================
 
-  const mobileLinkClass = ({ isActive }) =>
-    `flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors ${
-      isActive
-        ? "text-[#e9c349]"
-        : "text-[#c6c6cb] hover:text-[#e9c349]"
+  const mobileLinkClass = (sectionId) =>
+    `relative flex cursor-pointer items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors duration-300 ${activeSection === sectionId
+      ? "text-[#e9c349]"
+      : "text-[#c6c6cb] hover:text-[#e9c349]"
     }`;
 
   // =========================================================
-  // DESKTOP DROPDOWN ITEM
+  // DESKTOP ACTIVE DOT
   // =========================================================
 
-  const dropdownItemClass = ({ isActive }) =>
-    `block rounded-lg px-4 py-3 text-[12px] font-bold tracking-[1px] transition-all ${
-      isActive
-        ? "bg-[rgba(233,195,73,0.10)] text-[#e9c349]"
-        : "text-[#c6c6cb] hover:bg-[rgba(233,195,73,0.08)] hover:text-[#e9c349]"
-    }`;
+  const DesktopActiveDot = ({ sectionId }) => {
+    if (activeSection !== sectionId) return null;
+
+    return (
+      <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
+    );
+  };
 
   // =========================================================
-  // MOBILE DROPDOWN ITEM
+  // MOBILE ACTIVE DOT
   // =========================================================
 
-  const mobileDropdownItemClass = ({ isActive }) =>
-    `block rounded-md py-2 text-[12px] font-semibold tracking-[1px] transition-all ${
-      isActive
-        ? "bg-[rgba(233,195,73,0.08)] text-[#e9c349]"
-        : "text-[#a9a9b0] hover:text-[#e9c349]"
-    }`;
+  const MobileActiveDot = ({ sectionId }) => {
+    if (activeSection !== sectionId) return null;
+
+    return (
+      <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
+    );
+  };
 
   return (
     <>
@@ -162,9 +274,9 @@ function Navbar() {
               LOGO
           ================================================== */}
 
-          <NavLink
-            to="/"
-            onClick={closeMobileMenu}
+          <button
+            type="button"
+            onClick={() => scrollToHomeSection("home")}
             className="flex items-center gap-3 sm:gap-4"
           >
             <div className="h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-[#0b0e15] sm:h-10 sm:w-10">
@@ -178,7 +290,7 @@ function Navbar() {
             <span className="font-display whitespace-nowrap text-lg font-bold tracking-[-0.03em] text-[#e0e2ec] sm:text-2xl">
               A&amp;Y CONSOLIDATED
             </span>
-          </NavLink>
+          </button>
 
           {/* =================================================
               DESKTOP NAVIGATION
@@ -188,174 +300,83 @@ function Navbar() {
 
             {/* ================= HOME ================= */}
 
-            <NavLink
-              to="/"
-              end
-              className={navLinkClass}
+            <button
+              type="button"
+              onClick={() => scrollToHomeSection("home")}
+              className={desktopLinkClass("home")}
             >
-              {({ isActive }) => (
-                <>
-                  Home
+              Home
 
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                  )}
-                </>
+              <DesktopActiveDot sectionId="home" />
+            </button>
+
+            {/* ================= CONSTRUCTION ================= */}
+
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection("progression-section-1")
+              }
+              className={desktopLinkClass(
+                "progression-section-1"
               )}
-            </NavLink>
-
-            {/* ================= ABOUT ================= */}
-
-            <NavLink
-              to="/about"
-              className={navLinkClass}
             >
-              {({ isActive }) => (
-                <>
-                  About Us
+              Construction
 
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                  )}
-                </>
+              <DesktopActiveDot
+                sectionId="progression-section-1"
+              />
+            </button>
+
+            {/* ================= IMPORT & EXPORT ================= */}
+
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection("progression-section-2")
+              }
+              className={desktopLinkClass(
+                "progression-section-2"
               )}
-            </NavLink>
-
-            {/* =================================================
-                OUR BUSINESSES
-            ================================================== */}
-
-            <div
-              ref={businessMenuRef}
-              className="relative"
             >
-              <button
-                type="button"
-                onClick={() => {
-                  setIsBusinessOpen((prev) => !prev);
-                }}
-                className={`relative flex cursor-pointer items-center gap-2 text-[12px] font-bold tracking-[1.8px] transition ${
-                  isBusinessActive
-                    ? "text-[#e9c349]"
-                    : "text-[#c6c6cb] hover:text-[#e9c349]"
-                }`}
-              >
-                Our Businesses
+              Import &amp; Export
 
-                <svg
-                  className={`h-3 w-3 transition-transform ${
-                    isBusinessOpen
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+              <DesktopActiveDot
+                sectionId="progression-section-2"
+              />
+            </button>
 
-                {/* Parent active indicator */}
+            {/* ================= DISTRIBUTION ================= */}
 
-                {isBusinessActive && (
-                  <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                )}
-              </button>
-
-              {/* BUSINESS DROPDOWN */}
-
-              {isBusinessOpen && (
-                <div className="absolute left-1/2 top-full mt-5 w-72 -translate-x-1/2 rounded-xl border border-[rgba(233,195,73,0.25)] bg-[#10131a] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-
-                  <NavLink
-                    to="/construction-real-estate"
-                    onClick={() => {
-                      setIsBusinessOpen(false);
-                    }}
-                    className={dropdownItemClass}
-                  >
-                    Construction &amp; Real Estate
-                  </NavLink>
-
-                  <NavLink
-                    to="/import-export"
-                    onClick={() => {
-                      setIsBusinessOpen(false);
-                    }}
-                    className={dropdownItemClass}
-                  >
-                    Import &amp; Export
-                  </NavLink>
-
-                  <NavLink
-                    to="/trading-distribution"
-                    onClick={() => {
-                      setIsBusinessOpen(false);
-                    }}
-                    className={dropdownItemClass}
-                  >
-                    Trading &amp; Distribution
-                  </NavLink>
-
-                </div>
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection("progression-section-3")
+              }
+              className={desktopLinkClass(
+                "progression-section-3"
               )}
-            </div>
-
-            {/* ================= BLOG ================= */}
-
-            <NavLink
-              to="/blog"
-              className={navLinkClass}
             >
-              {({ isActive }) => (
-                <>
-                  Blog
+              Distribution
 
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                  )}
-                </>
-              )}
-            </NavLink>
-
-            {/* ================= FAQ ================= */}
-
-            <NavLink
-              to="/faq"
-              className={navLinkClass}
-            >
-              {({ isActive }) => (
-                <>
-                  FAQ
-
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                  )}
-                </>
-              )}
-            </NavLink>
+              <DesktopActiveDot
+                sectionId="progression-section-3"
+              />
+            </button>
 
             {/* ================= CONTACT ================= */}
 
-            <NavLink
-              to="/contact"
-              className={navLinkClass}
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection("location")
+              }
+              className={desktopLinkClass("location")}
             >
-              {({ isActive }) => (
-                <>
-                  Contact
+              Contact
 
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
-                  )}
-                </>
-              )}
-            </NavLink>
+              <DesktopActiveDot sectionId="location" />
+            </button>
 
           </nav>
 
@@ -363,12 +384,15 @@ function Navbar() {
               DESKTOP GET IN TOUCH
           ================================================== */}
 
-          <NavLink
-            to="/contact#contact"
-            className="hidden rounded-xl bg-[#e9c349] px-6 py-2.5 text-[12px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all hover:bg-[#ffd659] lg:flex"
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection("location")
+            }
+            className="hidden rounded-xl bg-[#e9c349] px-6 py-2.5 text-[12px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all hover:bg-[#ffd659] lg:flex cursor-pointer"
           >
             Get In Touch
-          </NavLink>
+          </button>
 
           {/* =================================================
               MOBILE MENU BUTTON
@@ -420,173 +444,91 @@ function Navbar() {
       ====================================================== */}
 
       <div
-        className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] lg:hidden ${
-          isMobileMenuOpen
-            ? "flex"
-            : "hidden"
-        }`}
+        className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] lg:hidden ${isMobileMenuOpen ? "flex" : "hidden"
+          }`}
       >
 
         <nav className="flex flex-col gap-3">
 
           {/* ================= HOME ================= */}
 
-          <NavLink
-            to="/"
-            end
-            onClick={closeMobileMenu}
-            className={mobileLinkClass}
+          <button
+            type="button"
+            onClick={() => scrollToHomeSection("home")}
+            className={mobileLinkClass("home")}
           >
-            {({ isActive }) => (
-              <>
-                <span>Home</span>
+            <span>Home</span>
 
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-                )}
-              </>
-            )}
-          </NavLink>
+            <MobileActiveDot sectionId="home" />
+          </button>
 
-          {/* ================= ABOUT ================= */}
-
-          <NavLink
-            to="/about"
-            onClick={closeMobileMenu}
-            className={mobileLinkClass}
-          >
-            {({ isActive }) => (
-              <>
-                <span>About Us</span>
-
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-                )}
-              </>
-            )}
-          </NavLink>
-
-          {/* =================================================
-              MOBILE OUR BUSINESSES
-          ================================================== */}
+          {/* ================= CONSTRUCTION ================= */}
 
           <button
             type="button"
-            onClick={() => {
-              setIsMobileBusinessOpen((prev) => !prev);
-            }}
-            className={`flex items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-left text-[13px] font-bold tracking-[1.5px] transition-colors ${
-              isBusinessActive
-                ? "text-[#e9c349]"
-                : "text-[#c6c6cb] hover:text-[#e9c349]"
-            }`}
+            onClick={() =>
+              scrollToHomeSection("progression-section-1")
+            }
+            className={mobileLinkClass(
+              "progression-section-1"
+            )}
           >
-            <span>Our Businesses</span>
+            <span>Construction</span>
 
-            <svg
-              className={`h-4 w-4 transition-transform ${
-                isMobileBusinessOpen
-                  ? "rotate-180"
-                  : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            <MobileActiveDot
+              sectionId="progression-section-1"
+            />
           </button>
 
-          {/* MOBILE BUSINESS DROPDOWN */}
+          {/* ================= IMPORT & EXPORT ================= */}
 
-          {isMobileBusinessOpen && (
-            <div className="ml-3 flex flex-col gap-1 border-l border-[rgba(233,195,73,0.2)] pl-4">
-
-              <NavLink
-                to="/construction-real-estate"
-                onClick={closeMobileMenu}
-                className={mobileDropdownItemClass}
-              >
-                Construction &amp; Real Estate
-              </NavLink>
-
-              <NavLink
-                to="/import-export"
-                onClick={closeMobileMenu}
-                className={mobileDropdownItemClass}
-              >
-                Import &amp; Export
-              </NavLink>
-
-              <NavLink
-                to="/trading-distribution"
-                onClick={closeMobileMenu}
-                className={mobileDropdownItemClass}
-              >
-                Trading &amp; Distribution
-              </NavLink>
-
-            </div>
-          )}
-
-          {/* ================= BLOG ================= */}
-
-          <NavLink
-            to="/blog"
-            onClick={closeMobileMenu}
-            className={mobileLinkClass}
-          >
-            {({ isActive }) => (
-              <>
-                <span>Blog</span>
-
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-                )}
-              </>
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection("progression-section-2")
+            }
+            className={mobileLinkClass(
+              "progression-section-2"
             )}
-          </NavLink>
-
-          {/* ================= FAQ ================= */}
-
-          <NavLink
-            to="/faq"
-            onClick={closeMobileMenu}
-            className={mobileLinkClass}
           >
-            {({ isActive }) => (
-              <>
-                <span>FAQ</span>
+            <span>Import &amp; Export</span>
 
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-                )}
-              </>
+            <MobileActiveDot
+              sectionId="progression-section-2"
+            />
+          </button>
+
+          {/* ================= DISTRIBUTION ================= */}
+
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection("progression-section-3")
+            }
+            className={mobileLinkClass(
+              "progression-section-3"
             )}
-          </NavLink>
+          >
+            <span>Distribution</span>
+
+            <MobileActiveDot
+              sectionId="progression-section-3"
+            />
+          </button>
 
           {/* ================= CONTACT ================= */}
 
-          <NavLink
-            to="/contact"
-            onClick={closeMobileMenu}
-            className={mobileLinkClass}
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection("location")
+            }
+            className={mobileLinkClass("location")}
           >
-            {({ isActive }) => (
-              <>
-                <span>Contact</span>
+            <span>Contact</span>
 
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
-                )}
-              </>
-            )}
-          </NavLink>
+            <MobileActiveDot sectionId="location" />
+          </button>
 
         </nav>
 
@@ -596,13 +538,15 @@ function Navbar() {
 
         <div className="mt-5 pt-2">
 
-          <NavLink
-            to="/contact#contact"
-            onClick={closeMobileMenu}
-            className="flex h-11 w-full items-center justify-center rounded-xl bg-[#e9c349] text-[11px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] transition-all hover:bg-[#ffd659]"
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection("location")
+            }
+            className="flex h-11 w-full items-center justify-center rounded-xl bg-[#e9c349] text-[11px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] transition-all hover:bg-[#ffd659] cursor-pointer"
           >
             GET IN TOUCH
-          </NavLink>
+          </button>
 
         </div>
 
