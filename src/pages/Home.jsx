@@ -1174,7 +1174,7 @@ function CompanyShowcase() {
         "Supporting the continued growth of A&Y Consolidated through strong leadership, collaboration, and disciplined execution. The role focuses on strengthening internal coordination and ensuring that the company’s vision is translated into effective day-to-day operations.",
       detail:
         "Executive Director · A&Y Consolidated",
-      image: "/assets/images/team-placeholder-02.svg",
+      image: "/assets/images/team-placeholder-02.jpg",
     },
     {
       eyebrow: "LEADERSHIP",
@@ -1184,7 +1184,7 @@ function CompanyShowcase() {
         "Helping shape efficient business operations while maintaining the standards and values that define A&Y Consolidated. The focus is on developing sustainable business relationships, improving operational efficiency, and supporting opportunities for continued growth.",
       detail:
         "Business Director · A&Y Consolidated",
-      image: "/assets/images/team-placeholder-03.svg",
+      image: "/assets/images/team-placeholder-03.jpg",
     },
   ];
 
