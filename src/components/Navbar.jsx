@@ -5,16 +5,27 @@ function Navbar() {
   // MOBILE MENU STATE
   // =========================================================
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] =
+    useState(false);
 
   // =========================================================
-  // ACTIVE SECTION STATE
+  // ACTIVE SECTION
   // =========================================================
 
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] =
+    useState("home");
 
   // =========================================================
-  // NAVIGATION SECTIONS
+  // NAVIGATION IDs
+  //
+  // IMPORTANT:
+  //
+  // progression-section-1 = Construction
+  // progression-section-2 = Import & Export
+  // progression-section-3 = Distribution
+  //
+  // These are navigation identifiers only.
+  // They are NOT separate DOM sections anymore.
   // =========================================================
 
   const sections = [
@@ -41,11 +52,23 @@ function Navbar() {
   ];
 
   // =========================================================
+  // BUSINESS STAGE MAP
+  // =========================================================
+
+  const businessStages = {
+    "progression-section-1": 0,
+    "progression-section-2": 1,
+    "progression-section-3": 2,
+  };
+
+  // =========================================================
   // MOBILE MENU
   // =========================================================
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
+    setIsMobileMenuOpen(
+      (previous) => !previous
+    );
   };
 
   const closeMobileMenu = () => {
@@ -53,14 +76,7 @@ function Navbar() {
   };
 
   // =========================================================
-  // GET ELEMENT DOCUMENT POSITION
-  // =========================================================
-  // This is intentionally based on offsetTop instead of
-  // getBoundingClientRect().
-  //
-  // Your BuildProgression sections use GSAP pinning.
-  // offsetTop gives us the original document position and
-  // therefore works more reliably with pinned sections.
+  // GET DOCUMENT TOP
   // =========================================================
 
   const getDocumentTop = (element) => {
@@ -69,7 +85,9 @@ function Navbar() {
 
     while (currentElement) {
       top += currentElement.offsetTop;
-      currentElement = currentElement.offsetParent;
+
+      currentElement =
+        currentElement.offsetParent;
     }
 
     return top;
@@ -77,45 +95,165 @@ function Navbar() {
 
   // =========================================================
   // UPDATE ACTIVE SECTION
+  //
+  // Normal sections:
+  //
+  // Home
+  // Location
+  //
+  // Business stages are handled using the actual
+  // pinned BusinessProgression ScrollTrigger.
   // =========================================================
 
   useEffect(() => {
     let ticking = false;
 
     const updateActiveSection = () => {
-      const scrollPosition = window.scrollY;
+      const scrollPosition =
+        window.scrollY;
 
-      // Header height + small buffer
-      const activationPoint = scrollPosition + 100;
+      const activationPoint =
+        scrollPosition + 100;
 
       let currentSection = "home";
 
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
+      // =====================================================
+      // HOME
+      // =====================================================
 
-        if (!element) return;
+      const homeElement =
+        document.getElementById("home");
 
-        const sectionTop = getDocumentTop(element);
+      const businessElement =
+        document.getElementById(
+          "businesses"
+        );
 
-        if (activationPoint >= sectionTop) {
-          currentSection = section.id;
+      const locationElement =
+        document.getElementById(
+          "location"
+        );
+
+      // =====================================================
+      // BUSINESS SECTION
+      //
+      // 3 videos
+      // 3600px each
+      //
+      // Video 1 = Construction
+      // Video 2 = Import & Export
+      // Video 3 = Distribution
+      // =====================================================
+
+      if (businessElement) {
+        const businessTop =
+          getDocumentTop(
+            businessElement
+          );
+
+        const totalBusinessScroll =
+          3600 * 3;
+
+        const businessEnd =
+          businessTop +
+          totalBusinessScroll;
+
+        if (
+          activationPoint >=
+            businessTop &&
+          activationPoint <
+            businessEnd
+        ) {
+          const progress =
+            Math.max(
+              0,
+              Math.min(
+                0.999999,
+                (activationPoint -
+                  businessTop) /
+                  totalBusinessScroll
+              )
+            );
+
+          const stageIndex =
+            Math.min(
+              2,
+              Math.floor(
+                progress * 3
+              )
+            );
+
+          if (stageIndex === 0) {
+            currentSection =
+              "progression-section-1";
+          } else if (
+            stageIndex === 1
+          ) {
+            currentSection =
+              "progression-section-2";
+          } else {
+            currentSection =
+              "progression-section-3";
+          }
         }
-      });
+      }
 
-      setActiveSection((previousSection) => {
-        if (previousSection === currentSection) {
-          return previousSection;
+      // =====================================================
+      // LOCATION
+      // =====================================================
+
+      if (
+        locationElement &&
+        activationPoint >=
+          getDocumentTop(
+            locationElement
+          )
+      ) {
+        currentSection =
+          "location";
+      }
+
+      // =====================================================
+      // HOME
+      // =====================================================
+
+      if (
+        homeElement &&
+        activationPoint <
+          getDocumentTop(
+            homeElement
+          )
+      ) {
+        currentSection =
+          "home";
+      }
+
+      // =====================================================
+      // ONLY UPDATE IF CHANGED
+      // =====================================================
+
+      setActiveSection(
+        (previousSection) => {
+          if (
+            previousSection ===
+            currentSection
+          ) {
+            return previousSection;
+          }
+
+          return currentSection;
         }
-
-        return currentSection;
-      });
+      );
 
       ticking = false;
     };
 
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateActiveSection);
+        window.requestAnimationFrame(
+          updateActiveSection
+        );
+
         ticking = true;
       }
     };
@@ -124,45 +262,165 @@ function Navbar() {
       updateActiveSection();
     };
 
-    // Initial check
     updateActiveSection();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
     };
   }, []);
 
   // =========================================================
-  // SCROLL TO SECTION
+  // SCROLL TO HOME SECTION
   // =========================================================
 
-  const scrollToHomeSection = (sectionId) => {
+  const scrollToHomeSection = (
+    sectionId
+  ) => {
     closeMobileMenu();
 
-    const element = document.getElementById(sectionId);
+    // =======================================================
+    // BUSINESS VIDEO NAVIGATION
+    // =======================================================
 
-    if (!element) return;
+    if (
+      businessStages[sectionId] !==
+      undefined
+    ) {
+      const stageIndex =
+        businessStages[
+          sectionId
+        ];
+
+      /*
+        BusinessProgression in Home.jsx
+        creates this function.
+
+        stage 0
+        → Construction frame 001
+
+        stage 1
+        → Import & Export frame 001
+
+        stage 2
+        → Distribution frame 001
+      */
+
+      if (
+        typeof window
+          .__businessScrollToStage ===
+        "function"
+      ) {
+        window.__businessScrollToStage(
+          stageIndex
+        );
+
+        setActiveSection(
+          sectionId
+        );
+
+        return;
+      }
+
+      // =====================================================
+      // FALLBACK
+      //
+      // If BusinessProgression has not registered
+      // its function yet, go to the beginning of
+      // the business section.
+      // =====================================================
+
+      const businessElement =
+        document.getElementById(
+          "businesses"
+        );
+
+      if (!businessElement) {
+        return;
+      }
+
+      const headerHeight = 73;
+
+      const elementTop =
+        getDocumentTop(
+          businessElement
+        );
+
+      const targetPosition =
+        Math.max(
+          0,
+          elementTop -
+            headerHeight
+        );
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "auto",
+      });
+
+      setActiveSection(
+        sectionId
+      );
+
+      return;
+    }
+
+    // =======================================================
+    // NORMAL SECTION NAVIGATION
+    //
+    // Home
+    // Contact
+    // =======================================================
+
+    const element =
+      document.getElementById(
+        sectionId
+      );
+
+    if (!element) {
+      return;
+    }
 
     const headerHeight = 73;
 
-    const elementTop = getDocumentTop(element);
+    const elementTop =
+      getDocumentTop(element);
 
-    const targetPosition = Math.max(
-      0,
-      elementTop - headerHeight
+    const targetPosition =
+      Math.max(
+        0,
+        elementTop -
+          headerHeight
+      );
+
+    setActiveSection(
+      sectionId
     );
 
-    // Immediately update active navigation
-    setActiveSection(sectionId);
+    // =======================================================
+    // URL
+    // =======================================================
 
-    // Update URL without reloading
     window.history.replaceState(
       null,
       "",
@@ -171,7 +429,10 @@ function Navbar() {
         : `/#${sectionId}`
     );
 
-    // DIRECT JUMP — no smooth scrolling
+    // =======================================================
+    // DIRECT JUMP
+    // =======================================================
+
     window.scrollTo({
       top: targetPosition,
       behavior: "auto",
@@ -183,63 +444,101 @@ function Navbar() {
   // =========================================================
 
   useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setIsMobileMenuOpen(false);
+    const handleEscape = (
+      event
+    ) => {
+      if (
+        event.key === "Escape"
+      ) {
+        setIsMobileMenuOpen(
+          false
+        );
       }
     };
 
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
     };
   }, []);
 
   // =========================================================
-  // CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+  // CLOSE MOBILE MENU ON DESKTOP
   // =========================================================
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsMobileMenuOpen(false);
+      if (
+        window.innerWidth >=
+        1024
+      ) {
+        setIsMobileMenuOpen(
+          false
+        );
       }
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
     };
   }, []);
 
   // =========================================================
-  // DESKTOP NAV LINK STYLE
+  // DESKTOP LINK STYLE
   // =========================================================
 
-  const desktopLinkClass = (sectionId) =>
-    `relative cursor-pointer text-[12px] font-bold tracking-[1.8px] transition-colors duration-300 ${activeSection === sectionId
-      ? "text-[#e9c349]"
-      : "text-[#c6c6cb] hover:text-[#e9c349]"
+  const desktopLinkClass = (
+    sectionId
+  ) =>
+    `relative cursor-pointer text-[12px] font-bold tracking-[1.8px] transition-colors duration-300 ${
+      activeSection ===
+      sectionId
+        ? "text-[#e9c349]"
+        : "text-[#c6c6cb] hover:text-[#e9c349]"
     }`;
 
   // =========================================================
-  // MOBILE NAV LINK STYLE
+  // MOBILE LINK STYLE
   // =========================================================
 
-  const mobileLinkClass = (sectionId) =>
-    `relative flex cursor-pointer items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors duration-300 ${activeSection === sectionId
-      ? "text-[#e9c349]"
-      : "text-[#c6c6cb] hover:text-[#e9c349]"
+  const mobileLinkClass = (
+    sectionId
+  ) =>
+    `relative flex cursor-pointer items-center justify-between border-b border-[rgba(233,195,73,0.1)] py-2.5 text-[13px] font-bold tracking-[1.5px] transition-colors duration-300 ${
+      activeSection ===
+      sectionId
+        ? "text-[#e9c349]"
+        : "text-[#c6c6cb] hover:text-[#e9c349]"
     }`;
 
   // =========================================================
   // DESKTOP ACTIVE DOT
   // =========================================================
 
-  const DesktopActiveDot = ({ sectionId }) => {
-    if (activeSection !== sectionId) return null;
+  const DesktopActiveDot = ({
+    sectionId,
+  }) => {
+    if (
+      activeSection !==
+      sectionId
+    ) {
+      return null;
+    }
 
     return (
       <span className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
@@ -250,13 +549,24 @@ function Navbar() {
   // MOBILE ACTIVE DOT
   // =========================================================
 
-  const MobileActiveDot = ({ sectionId }) => {
-    if (activeSection !== sectionId) return null;
+  const MobileActiveDot = ({
+    sectionId,
+  }) => {
+    if (
+      activeSection !==
+      sectionId
+    ) {
+      return null;
+    }
 
     return (
       <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349] shadow-[0_0_8px_#e9c349]" />
     );
   };
+
+  // =========================================================
+  // RENDER
+  // =========================================================
 
   return (
     <>
@@ -270,13 +580,15 @@ function Navbar() {
       >
         <div className="mx-auto flex h-full max-w-[1280px] items-center justify-between">
 
-          {/* =================================================
-              LOGO
-          ================================================== */}
+          {/* LOGO */}
 
           <button
             type="button"
-            onClick={() => scrollToHomeSection("home")}
+            onClick={() =>
+              scrollToHomeSection(
+                "home"
+              )
+            }
             className="flex items-center gap-3 sm:gap-4"
           >
             <div className="h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-[#0b0e15] sm:h-10 sm:w-10">
@@ -298,24 +610,34 @@ function Navbar() {
 
           <nav className="hidden items-center gap-8 lg:flex">
 
-            {/* ================= HOME ================= */}
-
-            <button
-              type="button"
-              onClick={() => scrollToHomeSection("home")}
-              className={desktopLinkClass("home")}
-            >
-              Home
-
-              <DesktopActiveDot sectionId="home" />
-            </button>
-
-            {/* ================= CONSTRUCTION ================= */}
+            {/* HOME */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToHomeSection("progression-section-1")
+                scrollToHomeSection(
+                  "home"
+                )
+              }
+              className={desktopLinkClass(
+                "home"
+              )}
+            >
+              Home
+
+              <DesktopActiveDot
+                sectionId="home"
+              />
+            </button>
+
+            {/* CONSTRUCTION */}
+
+            <button
+              type="button"
+              onClick={() =>
+                scrollToHomeSection(
+                  "progression-section-1"
+                )
               }
               className={desktopLinkClass(
                 "progression-section-1"
@@ -328,12 +650,14 @@ function Navbar() {
               />
             </button>
 
-            {/* ================= IMPORT & EXPORT ================= */}
+            {/* IMPORT & EXPORT */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToHomeSection("progression-section-2")
+                scrollToHomeSection(
+                  "progression-section-2"
+                )
               }
               className={desktopLinkClass(
                 "progression-section-2"
@@ -346,12 +670,14 @@ function Navbar() {
               />
             </button>
 
-            {/* ================= DISTRIBUTION ================= */}
+            {/* DISTRIBUTION */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToHomeSection("progression-section-3")
+                scrollToHomeSection(
+                  "progression-section-3"
+                )
               }
               className={desktopLinkClass(
                 "progression-section-3"
@@ -364,46 +690,53 @@ function Navbar() {
               />
             </button>
 
-            {/* ================= CONTACT ================= */}
+            {/* CONTACT */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToHomeSection("location")
+                scrollToHomeSection(
+                  "location"
+                )
               }
-              className={desktopLinkClass("location")}
+              className={desktopLinkClass(
+                "location"
+              )}
             >
               Contact
 
-              <DesktopActiveDot sectionId="location" />
+              <DesktopActiveDot
+                sectionId="location"
+              />
             </button>
-
           </nav>
 
-          {/* =================================================
-              DESKTOP GET IN TOUCH
-          ================================================== */}
+          {/* GET IN TOUCH */}
 
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("location")
+              scrollToHomeSection(
+                "location"
+              )
             }
-            className="hidden rounded-xl bg-[#e9c349] px-6 py-2.5 text-[12px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all hover:bg-[#ffd659] lg:flex cursor-pointer"
+            className="hidden cursor-pointer rounded-xl bg-[#e9c349] px-6 py-2.5 text-[12px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all hover:bg-[#ffd659] lg:flex"
           >
             Get In Touch
           </button>
 
-          {/* =================================================
-              MOBILE MENU BUTTON
-          ================================================== */}
+          {/* MOBILE MENU BUTTON */}
 
           <button
             type="button"
-            onClick={toggleMobileMenu}
+            onClick={
+              toggleMobileMenu
+            }
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-[rgba(233,195,73,0.35)] bg-[rgba(28,31,38,0.8)] text-[#e9c349] shadow-[0_4px_15px_rgba(0,0,0,0.4)] transition-all hover:border-[#e9c349] lg:hidden"
             aria-label="Toggle Navigation Menu"
-            aria-expanded={isMobileMenuOpen}
+            aria-expanded={
+              isMobileMenuOpen
+            }
           >
             {isMobileMenuOpen ? (
               <svg
@@ -435,7 +768,6 @@ function Navbar() {
               </svg>
             )}
           </button>
-
         </div>
       </header>
 
@@ -444,112 +776,136 @@ function Navbar() {
       ====================================================== */}
 
       <div
-        className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] lg:hidden ${isMobileMenuOpen ? "flex" : "hidden"
-          }`}
+        className={`fixed inset-x-0 top-[73px] z-50 flex-col border-b border-[rgba(233,195,73,0.3)] bg-[#10131a] px-6 py-6 shadow-[0_30px_70px_rgba(0,0,0,0.98)] lg:hidden ${
+          isMobileMenuOpen
+            ? "flex"
+            : "hidden"
+        }`}
       >
-
         <nav className="flex flex-col gap-3">
 
-          {/* ================= HOME ================= */}
-
-          <button
-            type="button"
-            onClick={() => scrollToHomeSection("home")}
-            className={mobileLinkClass("home")}
-          >
-            <span>Home</span>
-
-            <MobileActiveDot sectionId="home" />
-          </button>
-
-          {/* ================= CONSTRUCTION ================= */}
+          {/* HOME */}
 
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("progression-section-1")
+              scrollToHomeSection(
+                "home"
+              )
+            }
+            className={mobileLinkClass(
+              "home"
+            )}
+          >
+            <span>Home</span>
+
+            <MobileActiveDot
+              sectionId="home"
+            />
+          </button>
+
+          {/* CONSTRUCTION */}
+
+          <button
+            type="button"
+            onClick={() =>
+              scrollToHomeSection(
+                "progression-section-1"
+              )
             }
             className={mobileLinkClass(
               "progression-section-1"
             )}
           >
-            <span>Construction</span>
+            <span>
+              Construction
+            </span>
 
             <MobileActiveDot
               sectionId="progression-section-1"
             />
           </button>
 
-          {/* ================= IMPORT & EXPORT ================= */}
+          {/* IMPORT & EXPORT */}
 
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("progression-section-2")
+              scrollToHomeSection(
+                "progression-section-2"
+              )
             }
             className={mobileLinkClass(
               "progression-section-2"
             )}
           >
-            <span>Import &amp; Export</span>
+            <span>
+              Import &amp; Export
+            </span>
 
             <MobileActiveDot
               sectionId="progression-section-2"
             />
           </button>
 
-          {/* ================= DISTRIBUTION ================= */}
+          {/* DISTRIBUTION */}
 
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("progression-section-3")
+              scrollToHomeSection(
+                "progression-section-3"
+              )
             }
             className={mobileLinkClass(
               "progression-section-3"
             )}
           >
-            <span>Distribution</span>
+            <span>
+              Distribution
+            </span>
 
             <MobileActiveDot
               sectionId="progression-section-3"
             />
           </button>
 
-          {/* ================= CONTACT ================= */}
+          {/* CONTACT */}
 
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("location")
+              scrollToHomeSection(
+                "location"
+              )
             }
-            className={mobileLinkClass("location")}
+            className={mobileLinkClass(
+              "location"
+            )}
           >
             <span>Contact</span>
 
-            <MobileActiveDot sectionId="location" />
+            <MobileActiveDot
+              sectionId="location"
+            />
           </button>
-
         </nav>
 
-        {/* =================================================
-            MOBILE GET IN TOUCH
-        ================================================== */}
+        {/* MOBILE GET IN TOUCH */}
 
         <div className="mt-5 pt-2">
-
           <button
             type="button"
             onClick={() =>
-              scrollToHomeSection("location")
+              scrollToHomeSection(
+                "location"
+              )
             }
-            className="flex h-11 w-full items-center justify-center rounded-xl bg-[#e9c349] text-[11px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] transition-all hover:bg-[#ffd659] cursor-pointer"
+            className="flex h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-[#e9c349] text-[11px] font-bold tracking-[1.8px] text-[#3c2f00] shadow-[0_4px_20px_rgba(233,195,73,0.35)] transition-all hover:bg-[#ffd659]"
           >
             GET IN TOUCH
           </button>
-
         </div>
-
       </div>
     </>
   );

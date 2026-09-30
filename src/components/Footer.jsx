@@ -1,32 +1,148 @@
 import React from "react";
 
 function Footer() {
+  // =========================================================
+  // BUSINESS VIDEO STAGE MAP
+  //
+  // These are navigation identifiers only.
+  //
+  // 0 → Construction
+  // 1 → Import & Export
+  // 2 → Trading & Distribution
+  // =========================================================
+
+  const businessStages = {
+    "progression-section-1": 0,
+    "progression-section-2": 1,
+    "progression-section-3": 2,
+  };
 
   // =========================================================
-  // DIRECT JUMP TO HOME SECTION
+  // GET DOCUMENT TOP
   // =========================================================
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-
-    if (!element) return;
-
-    const headerHeight = 73;
-
-    let elementTop = 0;
+  const getDocumentTop = (element) => {
+    let top = 0;
     let currentElement = element;
 
     while (currentElement) {
-      elementTop += currentElement.offsetTop;
-      currentElement = currentElement.offsetParent;
+      top += currentElement.offsetTop;
+
+      currentElement =
+        currentElement.offsetParent;
     }
 
-    const targetPosition = Math.max(
-      0,
-      elementTop - headerHeight
-    );
+    return top;
+  };
 
-    // Update URL without page reload
+  // =========================================================
+  // SCROLL TO SECTION
+  // =========================================================
+
+  const scrollToSection = (
+    sectionId
+  ) => {
+    // =======================================================
+    // BUSINESS VIDEO NAVIGATION
+    // =======================================================
+
+    if (
+      businessStages[sectionId] !==
+      undefined
+    ) {
+      const stageIndex =
+        businessStages[
+          sectionId
+        ];
+
+      /*
+        Home.jsx handles the actual pinned
+        ScrollTrigger position.
+
+        0 → Construction frame 001
+        1 → Import & Export frame 001
+        2 → Distribution frame 001
+      */
+
+      if (
+        typeof window
+          .__businessScrollToStage ===
+        "function"
+      ) {
+        window.__businessScrollToStage(
+          stageIndex
+        );
+
+        return;
+      }
+
+      // =====================================================
+      // FALLBACK
+      // =====================================================
+
+      const businessElement =
+        document.getElementById(
+          "businesses"
+        );
+
+      if (!businessElement) {
+        return;
+      }
+
+      const headerHeight = 73;
+
+      const elementTop =
+        getDocumentTop(
+          businessElement
+        );
+
+      const targetPosition =
+        Math.max(
+          0,
+          elementTop -
+            headerHeight
+        );
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "auto",
+      });
+
+      return;
+    }
+
+    // =======================================================
+    // NORMAL SECTION
+    //
+    // Home
+    // Contact
+    // =======================================================
+
+    const element =
+      document.getElementById(
+        sectionId
+      );
+
+    if (!element) {
+      return;
+    }
+
+    const headerHeight = 73;
+
+    const elementTop =
+      getDocumentTop(element);
+
+    const targetPosition =
+      Math.max(
+        0,
+        elementTop -
+          headerHeight
+      );
+
+    // =======================================================
+    // URL
+    // =======================================================
+
     window.history.replaceState(
       null,
       "",
@@ -35,7 +151,10 @@ function Footer() {
         : `/#${sectionId}`
     );
 
+    // =======================================================
     // DIRECT JUMP
+    // =======================================================
+
     window.scrollTo({
       top: targetPosition,
       behavior: "auto",
@@ -51,7 +170,6 @@ function Footer() {
       id="footer"
       className="mx-auto mt-16 w-full max-w-[1280px] border-t border-[rgba(233,195,73,0.2)] bg-[#0b0e15] px-4 py-12 sm:mt-24 sm:px-6 lg:px-16"
     >
-
       {/* =====================================================
           MAIN FOOTER GRID
       ====================================================== */}
@@ -64,11 +182,15 @@ function Footer() {
 
         <div>
 
-          {/* Logo */}
+          {/* LOGO */}
 
           <button
             type="button"
-            onClick={() => scrollToSection("home")}
+            onClick={() =>
+              scrollToSection(
+                "home"
+              )
+            }
             className="mb-4 flex items-center gap-3"
           >
             <div className="h-9 w-9 overflow-hidden rounded-xl border border-[rgba(233,195,73,0.3)] bg-[#0b0e15]">
@@ -84,15 +206,17 @@ function Footer() {
             </span>
           </button>
 
-          {/* Description */}
+          {/* DESCRIPTION */}
 
           <p className="text-xs leading-relaxed text-[#c6c6cb] sm:text-sm">
-            Building businesses with quality, integrity and purpose across
-            construction, real estate, import &amp; export, trading and
+            Building businesses with quality,
+            integrity and purpose across
+            construction, real estate, import
+            &amp; export, trading and
             distribution.
           </p>
 
-          {/* Status */}
+          {/* STATUS */}
 
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(233,195,73,0.3)] bg-[rgba(233,195,73,0.08)] px-3 py-1 text-[10px] font-bold text-[#e9c349]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#e9c349]" />
@@ -101,7 +225,6 @@ function Footer() {
           </div>
 
         </div>
-
 
         {/* ===================================================
             COLUMN 2 — NAVIGATION
@@ -120,13 +243,16 @@ function Footer() {
             <li>
               <button
                 type="button"
-                onClick={() => scrollToSection("home")}
+                onClick={() =>
+                  scrollToSection(
+                    "home"
+                  )
+                }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
                 Home
               </button>
             </li>
-
 
             {/* CONSTRUCTION */}
 
@@ -134,7 +260,9 @@ function Footer() {
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-1")
+                  scrollToSection(
+                    "progression-section-1"
+                  )
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -142,14 +270,15 @@ function Footer() {
               </button>
             </li>
 
-
             {/* IMPORT & EXPORT */}
 
             <li>
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-2")
+                  scrollToSection(
+                    "progression-section-2"
+                  )
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -157,14 +286,15 @@ function Footer() {
               </button>
             </li>
 
-
             {/* DISTRIBUTION */}
 
             <li>
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-3")
+                  scrollToSection(
+                    "progression-section-3"
+                  )
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -172,14 +302,15 @@ function Footer() {
               </button>
             </li>
 
-
             {/* CONTACT */}
 
             <li>
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("location")
+                  scrollToSection(
+                    "location"
+                  )
                 }
                 className="text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -188,9 +319,7 @@ function Footer() {
             </li>
 
           </ul>
-
         </div>
-
 
         {/* ===================================================
             COLUMN 3 — OUR BUSINESSES
@@ -210,14 +339,16 @@ function Footer() {
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-1")
+                  scrollToSection(
+                    "progression-section-1"
+                  )
                 }
                 className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
-                Construction &amp; Real Estate
+                Construction &amp;
+                Real Estate
               </button>
             </li>
-
 
             {/* IMPORT & EXPORT */}
 
@@ -225,7 +356,9 @@ function Footer() {
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-2")
+                  scrollToSection(
+                    "progression-section-2"
+                  )
                 }
                 className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
@@ -233,25 +366,25 @@ function Footer() {
               </button>
             </li>
 
-
             {/* TRADING & DISTRIBUTION */}
 
             <li>
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("progression-section-3")
+                  scrollToSection(
+                    "progression-section-3"
+                  )
                 }
                 className="text-left text-[#c6c6cb] transition-colors hover:text-[#e9c349]"
               >
-                Trading &amp; Distribution
+                Trading &amp;
+                Distribution
               </button>
             </li>
 
           </ul>
-
         </div>
-
 
         {/* ===================================================
             COLUMN 4 — CONTACT
@@ -292,7 +425,6 @@ function Footer() {
 
             </p>
 
-
             {/* EMAIL */}
 
             <p className="flex items-center gap-2">
@@ -320,27 +452,25 @@ function Footer() {
 
             </p>
 
-
             {/* ADDRESS */}
 
             <button
               type="button"
               onClick={() =>
-                scrollToSection("location")
+                scrollToSection(
+                  "location"
+                )
               }
               className="pt-1 text-left text-[11px] leading-5 text-[#8e9099] transition-colors hover:text-[#e9c349]"
             >
-              Level 12, Prime Tower,
+              No 55/1 B, Nikape Road,
               <br />
-              Marine Drive, Colombo 03
+              Nedimala, Dehiwala
             </button>
 
           </div>
-
         </div>
-
       </div>
-
 
       {/* =====================================================
           BOTTOM BAR
@@ -351,7 +481,8 @@ function Footer() {
         {/* COPYRIGHT */}
 
         <p>
-          © 2024–2026 A&amp;Y CONSOLIDATED (PVT) LTD.
+          © 2024–2026 A&amp;Y
+          CONSOLIDATED (PVT) LTD.
           ALL RIGHTS RESERVED.
         </p>
 
@@ -361,7 +492,11 @@ function Footer() {
 
           <button
             type="button"
-            onClick={() => scrollToSection("home")}
+            onClick={() =>
+              scrollToSection(
+                "home"
+              )
+            }
             className="transition-colors hover:text-[#e9c349]"
           >
             Home
@@ -370,7 +505,9 @@ function Footer() {
           <button
             type="button"
             onClick={() =>
-              scrollToSection("location")
+              scrollToSection(
+                "location"
+              )
             }
             className="transition-colors hover:text-[#e9c349]"
           >
@@ -378,9 +515,7 @@ function Footer() {
           </button>
 
         </div>
-
       </div>
-
     </footer>
   );
 }
