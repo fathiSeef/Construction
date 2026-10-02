@@ -1466,12 +1466,12 @@ function Home() {
           COMPANY NAME
       ================================================== */}
 
-              <div className="mb-8 sm:mb-6">
+              <div className="mb-2 sm:mb-6">
 
                 <h1
                   className="
             font-display
-            text-[38px]
+            text-[28px]
             font-semibold
             leading-none
             tracking-[-0.035em]
@@ -1510,7 +1510,7 @@ function Home() {
               <h2
                 className="
           font-display
-          text-[25px]
+          text-[16px]
           font-medium
           leading-tight
           tracking-[-0.02em]
