@@ -1008,8 +1008,8 @@ function BusinessProgression() {
       className="relative h-screen w-full overflow-hidden bg-[#080b10]"
     >
 
-      
-      
+
+
       {/* =====================================================
           VIDEO STAGE
           Kept visually separate from the section header.
@@ -1158,12 +1158,33 @@ function CompanyShowcase() {
   const slides = [
     {
       eyebrow: "LEADERSHIP",
-      title: "Chief Executive",
-      accent: "Officer.",
-      quote:
-        "Leading A&Y Consolidated with a clear focus on quality, integrity, responsible growth, and long-term value. The leadership approach is centred on building a strong foundation for the company while maintaining high standards across every area of operation.",
-      detail:
-        "CEO · A&Y Consolidated",
+      title: "Managing",
+      accent: "Director.",
+      quote: (
+        <>
+          Welcome to A & Y Consolidated (Pvt) Ltd.
+
+At "A & Y Consolidated, we are committed to creating lasting value and building trusted partnerships across Real Estate, Trading, and Import & Export. Guided by integrity, professionalism, quality, and customer satisfaction, we strive to deliver reliable solutions and sustainable business opportunities.
+
+Our vision is to strengthen business relationships, explore new markets, and create long-term value for our customers, partners, and stakeholders through responsible business practices and continuous growth.
+
+We sincerely appreciate the trust and confidence placed in us and look forward to building lasting partnerships and achieving shared success in the years ahead.
+          <br />
+          <br />
+          <span className="font-semibold italic">
+            “Together We Build. Together We Grow.”
+          </span>
+        </>
+      ),
+      detail: (
+        <>
+        <br />
+          Warm regards,<br />
+          Mohamed Yahiya<br />
+          Managing Director<br />
+          A & Y Consolidated (Pvt) Ltd
+        </>
+      ),
       image: "/assets/images/ceo-profile.jpg",
     },
     {
@@ -1311,11 +1332,10 @@ function CompanyShowcase() {
                       type="button"
                       aria-label={`Go to slide ${index + 1}`}
                       onClick={() => setActiveSlide(index)}
-                      className={`h-[3px] rounded-full transition-all duration-500 ${
-                        activeSlide === index
-                          ? "w-9 bg-[#e9c349]"
-                          : "w-4 bg-[#454a54] hover:bg-[#8b7a3b]"
-                      }`}
+                      className={`h-[3px] rounded-full transition-all duration-500 ${activeSlide === index
+                        ? "w-9 bg-[#e9c349]"
+                        : "w-4 bg-[#454a54] hover:bg-[#8b7a3b]"
+                        }`}
                     />
                   ))}
                 </div>
@@ -1485,7 +1505,7 @@ function Home() {
                 >
                   A&amp;Y CONSOLIDATED
                   <span className="ml-2 text-[#e9c349] mr-2">
-                    (PVT)  
+                    (PVT)
                   </span>
                   LTD
                 </h1>
