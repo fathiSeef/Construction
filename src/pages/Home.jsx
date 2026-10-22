@@ -1388,15 +1388,6 @@ function CompanyShowcase() {
             </div>
           </div>
         </div>
-
-        <div className="mt-7 flex items-center justify-between">
-          <span className="text-[8px] font-mono uppercase tracking-[2.5px] text-[#555a65]">
-            A&amp;Y CONSOLIDATED (PVT) LTD
-          </span>
-          <span className="text-[8px] font-mono uppercase tracking-[2.5px] text-[#555a65]">
-            Excellence · Integrity · Quality
-          </span>
-        </div>
       </div>
     </section>
   );
