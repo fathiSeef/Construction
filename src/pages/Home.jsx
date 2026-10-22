@@ -1033,13 +1033,13 @@ function BusinessProgression() {
         />
 
         {/* Video dark treatment */}
-        <div className="pointer-events-none absolute inset-0 bg-[#05070b]/15" />
+        <div className="business-video-dark pointer-events-none absolute inset-0 bg-[#05070b]/15" />
 
         {/* Left readability gradient */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-full bg-gradient-to-r from-[#070a10]/95 via-[#070a10]/72 to-transparent md:w-[78%] lg:w-[68%]" />
+        <div className="business-video-left-gradient pointer-events-none absolute inset-y-0 left-0 z-[2] w-full bg-gradient-to-r from-[#070a10]/95 via-[#070a10]/72 to-transparent md:w-[78%] lg:w-[68%]" />
 
         {/* Cinematic top/bottom separation */}
-        <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#080b10]/90 via-transparent to-[#080b10]/25" />
+        <div className="business-video-bottom-gradient pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#080b10]/90 via-transparent to-[#080b10]/25" />
 
       </div>
 

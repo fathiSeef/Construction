@@ -293,3 +293,27 @@ button:focus-visible {
     margin-bottom: 0;
   }
 }
+
+
+/* =========================================================
+   BUSINESS VIDEO OVERLAY
+   Desktop: keep existing cinematic dark treatment
+   Tablet + Mobile portrait: keep frames bright because
+   text is displayed below the frames.
+   ========================================================= */
+
+@media (max-width: 1023px) and (orientation: portrait) {
+
+  #businesses .business-video-dark {
+  background: rgba(23, 13, 13, 0.3) !important;
+}
+
+  #businesses .business-video-left-gradient {
+    display: none;
+  }
+
+  #businesses .business-video-bottom-gradient {
+    background: transparent !important;
+  }
+
+}
