@@ -1164,11 +1164,11 @@ function CompanyShowcase() {
         <>
           Welcome to A & Y Consolidated (Pvt) Ltd.
 
-At "A & Y Consolidated, we are committed to creating lasting value and building trusted partnerships across Real Estate, Trading, and Import & Export. Guided by integrity, professionalism, quality, and customer satisfaction, we strive to deliver reliable solutions and sustainable business opportunities.
+          At "A & Y Consolidated, we are committed to creating lasting value and building trusted partnerships across Real Estate, Trading, and Import & Export. Guided by integrity, professionalism, quality, and customer satisfaction, we strive to deliver reliable solutions and sustainable business opportunities.
 
-Our vision is to strengthen business relationships, explore new markets, and create long-term value for our customers, partners, and stakeholders through responsible business practices and continuous growth.
+          Our vision is to strengthen business relationships, explore new markets, and create long-term value for our customers, partners, and stakeholders through responsible business practices and continuous growth.
 
-We sincerely appreciate the trust and confidence placed in us and look forward to building lasting partnerships and achieving shared success in the years ahead.
+          We sincerely appreciate the trust and confidence placed in us and look forward to building lasting partnerships and achieving shared success in the years ahead.
           <br />
           <br />
           <span className="font-semibold italic">
@@ -1178,7 +1178,7 @@ We sincerely appreciate the trust and confidence placed in us and look forward t
       ),
       detail: (
         <>
-        <br />
+          <br />
           Warm regards,<br />
           Mohamed Yahiya<br />
           Managing Director<br />
@@ -1189,23 +1189,25 @@ We sincerely appreciate the trust and confidence placed in us and look forward t
     },
     {
       eyebrow: "LEADERSHIP",
-      title: "Executive",
       accent: "Director.",
-      quote:
-        "Supporting the continued growth of A&Y Consolidated through strong leadership, collaboration, and disciplined execution. The role focuses on strengthening internal coordination and ensuring that the company’s vision is translated into effective day-to-day operations.",
-      detail:
-        "Executive Director · A&Y Consolidated",
-      image: "/assets/images/team-placeholder-02.jpg",
-    },
-    {
-      eyebrow: "LEADERSHIP",
-      title: "Business",
-      accent: "Director.",
-      quote:
-        "Helping shape efficient business operations while maintaining the standards and values that define A&Y Consolidated. The focus is on developing sustainable business relationships, improving operational efficiency, and supporting opportunities for continued growth.",
-      detail:
-        "Business Director · A&Y Consolidated",
-      image: "/assets/images/team-placeholder-03.jpg",
+      quote: (
+        <>
+          At A&Y Consolidated, we are committed to delivering dependable solutions, building lasting partnerships, and creating value across every sector we serve. My vision is to establish A&Y as a trusted name in the market, driving sustainable growth while contributing to Sri Lanka’s economic progress and the well-being of our fellow Sri Lankans.
+          <br />
+          <br />
+          <span className="font-semibold italic">
+            "Building Trust. Creating Value. Advancing Sri Lanka."
+          </span>
+        </>
+      ),
+      detail: (
+        <>
+          <br />
+          Director,<br />
+          A & Y Consolidated (Pvt) Ltd
+        </>
+      ),
+      image: "/assets/images/director.jpg",
     },
   ];
 
@@ -1291,9 +1293,8 @@ We sincerely appreciate the trust and confidence placed in us and look forward t
                   </span>
                 </div>
 
-                <h2 className="font-display text-[34px] font-medium leading-[1.05] tracking-[-0.025em] text-[#f1eee7] sm:text-[42px] md:text-[48px] lg:text-[52px]">
-                  {currentSlide.title}
-                  <br />
+                <h2 className="font-display text-[24px] font-medium leading-[1.05] tracking-[-0.025em] text-[#f1eee7] sm:text-[32px] md:text-[48px] lg:text-[42px]">
+                  {currentSlide.title} &nbsp;
                   <span className="gold-gradient-text">
                     {currentSlide.accent}
                   </span>
@@ -1647,7 +1648,7 @@ function Home() {
 
             {/* MAIN LOCATION CARD */}
 
-            <div className="overflow-hidden rounded-[24px] border border-[rgba(233,195,73,0.2)] bg-[#0c0f15] shadow-[0_25px_80px_rgba(0,0,0,0.5)]">
+            <div className="overflow-hidden rounded-[24px] border border-[rgba(233,195,73,0.2)] bg-[#181818] shadow-[0_25px_80px_rgba(0,0,0,0.5)]">
 
               <div className="grid grid-cols-1 lg:grid-cols-12">
 
@@ -1681,7 +1682,7 @@ function Home() {
 
                     {/* ADDRESS */}
 
-                    <div className="mt-6 rounded-2xl border border-[rgba(233,195,73,0.18)] bg-[rgba(233,195,73,0.045)] p-4">
+                    <div className="mt-6 rounded-2xl border-2 border-[rgba(239,205,95,0.15)] bg-[#10131a] p-4">
 
                       <div className="flex items-start gap-3">
 
@@ -1731,7 +1732,7 @@ function Home() {
 
                     <div className="mt-4 grid grid-cols-3 gap-2.5">
 
-                      <div className="rounded-xl border border-[rgba(233,195,73,0.15)] bg-[#10131a] p-3 text-center">
+                      <div className="rounded-xl border-2 border-[rgba(239,205,95,0.15)] bg-[#10131a] p-3 text-center">
                         <div className="font-mono text-base font-bold text-[#e9c349]">
                           2 Min
                         </div>
@@ -1740,7 +1741,7 @@ function Home() {
                         </div>
                       </div>
 
-                      <div className="rounded-xl border border-[rgba(233,195,73,0.15)] bg-[#10131a] p-3 text-center">
+                      <div className="rounded-xl border-2 border-[rgba(239,205,95,0.15)] bg-[#10131a] p-3 text-center">
                         <div className="font-mono text-base font-bold text-[#e9c349]">
                           3 Min
                         </div>
@@ -1749,7 +1750,7 @@ function Home() {
                         </div>
                       </div>
 
-                      <div className="rounded-xl border border-[rgba(233,195,73,0.15)] bg-[#10131a] p-3 text-center">
+                      <div className="rounded-xl border-2 border-[rgba(239,205,95,0.15)] bg-[#10131a] p-3 text-center">
                         <div className="font-mono text-base font-bold text-[#e9c349]">
                           8 Min
                         </div>
