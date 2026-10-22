@@ -364,7 +364,17 @@ function BusinessProgression() {
          OBJECT COVER
       ----------------------------------------------------- */
 
-      if (
+      // Match the Builders portrait layout: show each full frame above the copy.
+      if (window.matchMedia("(max-width: 1023px) and (orientation: portrait)").matches) {
+        const scale = Math.min(
+          rect.width / img.naturalWidth,
+          rect.height / img.naturalHeight
+        );
+        drawW = img.naturalWidth * scale;
+        drawH = img.naturalHeight * scale;
+        drawX = (rect.width - drawW) / 2;
+        drawY = (rect.height - drawH) / 2;
+      } else if (
         canvasAspect >
         imgAspect
       ) {
@@ -1015,7 +1025,7 @@ function BusinessProgression() {
           Kept visually separate from the section header.
       ====================================================== */}
 
-      <div className="absolute inset-0 z-[1] overflow-hidden bg-[#090b10]">
+      <div className="business-media absolute inset-0 z-[1] overflow-hidden bg-[#090b10]">
 
         <canvas
           ref={canvasRef}
@@ -1039,7 +1049,7 @@ function BusinessProgression() {
 
       <div
         ref={scrollIndicatorRef}
-        className="pointer-events-none absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 transition-opacity duration-300"
+        className="business-scroll-indicator pointer-events-none absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 transition-opacity duration-300"
       >
 
         <div className="flex h-8 w-5 items-start justify-center rounded-full border-2 border-[rgba(233,195,73,0.5)] p-1">
@@ -1060,9 +1070,9 @@ function BusinessProgression() {
           Text is positioned inside the video stage only.
       ====================================================== */}
 
-      <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-center px-6 pb-0 pt-0 sm:px-10 md:px-14 lg:px-16 xl:px-20">
+      <div className="business-copy-area pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-center px-6 pb-0 pt-0 sm:px-10 md:px-14 lg:px-16 xl:px-20">
 
-        <div className="relative min-h-[460px] w-full max-w-[540px] sm:min-h-[480px] sm:max-w-[580px] lg:min-h-[500px]">
+        <div className="business-copy-stack relative min-h-[460px] w-full max-w-[540px] sm:min-h-[480px] sm:max-w-[580px] lg:min-h-[500px]">
 
           {BUSINESS_DATA.map(
             (
@@ -1076,7 +1086,7 @@ function BusinessProgression() {
                     index
                   ] = element;
                 }}
-                className="absolute left-0 top-1/2 w-full -translate-y-1/2"
+                className="business-copy absolute left-0 top-1/2 w-full -translate-y-1/2"
                 style={{
                   opacity:
                     index === 0
